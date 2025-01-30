@@ -1,129 +1,206 @@
 // situational-awareness.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Define the graph data
-    const nodes = new vis.DataSet([
-        // Main scenarios
-        { id: 1, label: 'Disaster Response', group: 1, size: 30 },
-        { id: 2, label: 'Cybersecurity\nThreats', group: 2, size: 30 },
-        { id: 3, label: 'Supply Chain\nDisruption', group: 3, size: 30 },
-        { id: 4, label: 'Public Safety', group: 4, size: 30 },
-        { id: 5, label: 'Military Operations', group: 5, size: 30 },
-        
-        // Supporting nodes - Disaster Response
-        { id: 11, label: 'FEMA Declarations', group: 1, size: 20 },
-        { id: 12, label: 'Critical Infrastructure', group: 1, size: 20 },
-        { id: 13, label: 'Emergency Response', group: 1, size: 20 },
-        
-        // Supporting nodes - Cybersecurity
-        { id: 21, label: 'Threat Intelligence', group: 2, size: 20 },
-        { id: 22, label: 'Network Monitoring', group: 2, size: 20 },
-        { id: 23, label: 'Incident Response', group: 2, size: 20 },
-        
-        // Supporting nodes - Supply Chain
-        { id: 31, label: 'Inventory Tracking', group: 3, size: 20 },
-        { id: 32, label: 'Supplier Network', group: 3, size: 20 },
-        { id: 33, label: 'Logistics', group: 3, size: 20 },
-        
-        // Cross-cutting concerns
-        { id: 41, label: 'AI & ML', group: 6, size: 25 },
-        { id: 42, label: 'Real-time Monitoring', group: 6, size: 25 },
-        { id: 43, label: 'Data Integration', group: 6, size: 25 }
-    ]);
-
-    const edges = new vis.DataSet([
-        // Disaster Response connections
-        { from: 1, to: 11 }, { from: 1, to: 12 }, { from: 1, to: 13 },
-        
-        // Cybersecurity connections
-        { from: 2, to: 21 }, { from: 2, to: 22 }, { from: 2, to: 23 },
-        
-        // Supply Chain connections
-        { from: 3, to: 31 }, { from: 3, to: 32 }, { from: 3, to: 33 },
-        
-        // Cross-domain connections
-        { from: 41, to: 1 }, { from: 41, to: 2 }, { from: 41, to: 3 },
-        { from: 41, to: 4 }, { from: 41, to: 5 },
-        
-        { from: 42, to: 1 }, { from: 42, to: 3 }, { from: 42, to: 4 },
-        
-        { from: 43, to: 1 }, { from: 43, to: 2 }, { from: 43, to: 3 },
-        { from: 43, to: 4 }, { from: 43, to: 5 },
-        
-        // Inter-domain connections
-        { from: 1, to: 2, dashes: true },
-        { from: 2, to: 3, dashes: true },
-        { from: 3, to: 4, dashes: true },
-        { from: 4, to: 5, dashes: true }
-    ]);
-
-    // Create the network
-    const container = document.getElementById('graph-container');
-    const data = { nodes, edges };
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load the graph data
+    const response = await fetch('/assets/js/situational-awareness-graph.json');
+    const graphData = await response.json();
     
-    const options = {
-        nodes: {
-            shape: 'circle',
-            font: {
-                size: 14,
-                multi: true,
-                face: 'arial'
-            },
-            borderWidth: 2,
-            shadow: true
-        },
-        edges: {
-            width: 2,
-            smooth: {
-                type: 'continuous'
-            },
-            arrows: {
-                to: { enabled: true, scaleFactor: 0.5 }
+    // Process nodes and edges into Cytoscape format
+    const elements = {
+        nodes: graphData.nodes.map(node => ({
+            data: {
+                id: node.id,
+                label: node.id,
+                // Include metrics as properties
+                incidentResponseTime: node['Incident Response Time'],
+                coordination: node['Coordination'],
+                detectionRate: node['Detection Rate'],
+                responseTime: node['Response Time'],
+                disruptionImpact: node['Disruption Impact'],
+                anomalyAccuracy: node['Anomaly Accuracy'],
+                decisionAccuracy: node['Decision Accuracy'],
+                // Add a color based on node type
+                color: getNodeColor(node.id),
+                // Add size based on metrics
+                size: getNodeSize(node)
             }
-        },
-        physics: {
-            stabilization: true,
-            barnesHut: {
-                gravitationalConstant: -80000,
-                springConstant: 0.001,
-                springLength: 200
+        })),
+        edges: graphData.edges.map(edge => ({
+            data: {
+                source: edge.source,
+                target: edge.target
             }
-        },
-        groups: {
-            1: { color: { background: '#FF9999', border: '#FF0000' } },
-            2: { color: { background: '#99FF99', border: '#00FF00' } },
-            3: { color: { background: '#9999FF', border: '#0000FF' } },
-            4: { color: { background: '#FFFF99', border: '#FFFF00' } },
-            5: { color: { background: '#FF99FF', border: '#FF00FF' } },
-            6: { color: { background: '#99FFFF', border: '#00FFFF' } }
-        }
+        }))
     };
+    
+    // Helper function to determine node size based on available metrics
+    function getNodeSize(node) {
+        if (node['Incident Response Time']) return node['Incident Response Time'] / 2;
+        if (node['Detection Rate']) return node['Detection Rate'] * 80;
+        if (node['Disruption Impact']) return node['Disruption Impact'] * 80;
+        if (node['Anomaly Accuracy']) return node['Anomaly Accuracy'] * 80;
+        if (node['Decision Accuracy']) return node['Decision Accuracy'] * 80;
+        return 40; // default size for nodes without metrics
+    }
+    
+    // Helper function to assign colors based on node type
+    function getNodeColor(id) {
+        const colors = {
+            'Disaster Response': '#ef4444',           // red
+            'Cybersecurity Threat Propagation': '#22c55e', // green
+            'Supply Chain Disruption': '#3b82f6',     // blue
+            'Public Safety Real-Time Anomaly Detection': '#f59e0b', // amber
+            'Military Operations Causal Reasoning': '#8b5cf6'  // purple
+        };
+        return colors[id] || '#94a3b8'; // default gray for other nodes
+    }
 
-    const network = new vis.Network(container, data, options);
+    // Initialize Cytoscape
+    const cy = cytoscape({
+        container: document.getElementById('graph-container'),
+        elements: elements,
+        style: [
+            {
+                selector: 'node',
+                style: {
+                    'label': 'data(label)',
+                    'text-wrap': 'wrap',
+                    'text-max-width': '100px',
+                    'font-size': '12px',
+                    'text-valign': 'center',
+                    'text-halign': 'center',
+                    'background-color': 'data(color)',
+                    'border-width': 2,
+                    'border-color': '#4f46e5',
+                    'width': 'data(size)',
+                    'height': 'data(size)',
+                }
+            },
+            {
+                selector: 'edge',
+                style: {
+                    'width': 2,
+                    'line-color': '#94a3b8',
+                    'target-arrow-color': '#94a3b8',
+                    'target-arrow-shape': 'triangle',
+                    'curve-style': 'bezier'
+                }
+            },
+            {
+                selector: ':selected',
+                style: {
+                    'background-color': '#f59e0b',
+                    'border-color': '#d97706',
+                    'line-color': '#f59e0b',
+                    'target-arrow-color': '#f59e0b'
+                }
+            }
+        ],
+        layout: {
+            name: 'cola',
+            animate: true,
+            nodeSpacing: 120,
+            edgeLengthVal: 100,
+            maxSimulationTime: 3000
+        }
+    });
+
+    // Calculate node degrees for sizing
+    cy.nodes().forEach(node => {
+        node.data('degree', node.degree());
+    });
+
+    // Add tooltips
+    const tooltip = document.querySelector('.node-tooltip');
+    cy.on('mouseover', 'node', function(e) {
+        const node = e.target;
+        const pos = e.renderedPosition;
+        const data = node.data();
+        
+        // Build tooltip content
+        let content = `<strong>${data.label}</strong><br>`;
+        for (const [key, value] of Object.entries(data)) {
+            if (key !== 'id' && key !== 'label') {
+                content += `${key}: ${typeof value === 'number' ? value.toFixed(2) : value}<br>`;
+            }
+        }
+        
+        tooltip.innerHTML = content;
+        tooltip.style.left = `${pos.x + 10}px`;
+        tooltip.style.top = `${pos.y + 10}px`;
+        tooltip.style.display = 'block';
+    });
+
+    cy.on('mouseout', 'node', function() {
+        tooltip.style.display = 'none';
+    });
 
     // Add zoom controls
-    document.getElementById('zoomIn').onclick = function() {
-        network.zoomIn(0.5);
-    };
-    
-    document.getElementById('zoomOut').onclick = function() {
-        network.zoomOut(0.5);
-    };
-    
-    document.getElementById('resetView').onclick = function() {
-        network.fit();
-    };
-
-    // Add hover effect for nodes
-    network.on('hoverNode', function(params) {
-        container.style.cursor = 'pointer';
-    });
-    
-    network.on('blurNode', function(params) {
-        container.style.cursor = 'default';
+    document.getElementById('zoomIn').addEventListener('click', () => {
+        cy.zoom({
+            level: cy.zoom() * 1.2,
+            renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 }
+        });
     });
 
-    // Initial layout stabilization
-    network.once('stabilizationIterationsDone', function() {
-        network.setOptions({ physics: false });
+    document.getElementById('zoomOut').addEventListener('click', () => {
+        cy.zoom({
+            level: cy.zoom() * 0.8,
+            renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 }
+        });
     });
+
+    document.getElementById('resetView').addEventListener('click', () => {
+        cy.fit();
+        cy.center();
+    });
+
+    let usingCola = true;
+    document.getElementById('toggleLayout').addEventListener('click', () => {
+        const layout = usingCola ? 
+            { name: 'concentric', minNodeSpacing: 100 } : 
+            { name: 'cola', nodeSpacing: 120, edgeLengthVal: 100 };
+        
+        cy.layout(layout).run();
+        usingCola = !usingCola;
+    });
+
+    cy.on('mouseover', 'node', function(e) {
+        const node = e.target.data();
+        let content = `<strong>${node.label}</strong><br>`;
+        
+        if (node.incidentResponseTime) 
+            content += `Incident Response Time: ${node.incidentResponseTime.toFixed(2)}<br>`;
+        if (node.coordination) 
+            content += `Coordination: ${node.coordination.toFixed(2)}<br>`;
+        if (node.detectionRate) 
+            content += `Detection Rate: ${node.detectionRate.toFixed(2)}<br>`;
+        if (node.responseTime) 
+            content += `Response Time: ${node.responseTime.toFixed(2)}<br>`;
+        if (node.disruptionImpact) 
+            content += `Disruption Impact: ${node.disruptionImpact.toFixed(2)}<br>`;
+        if (node.anomalyAccuracy) 
+            content += `Anomaly Accuracy: ${node.anomalyAccuracy.toFixed(2)}<br>`;
+        if (node.decisionAccuracy) 
+            content += `Decision Accuracy: ${node.decisionAccuracy.toFixed(2)}<br>`;
+        
+        tooltip.innerHTML = content;
+        const pos = e.renderedPosition;
+        tooltip.style.left = `${pos.x + 10}px`;
+        tooltip.style.top = `${pos.y + 10}px`;
+        tooltip.style.display = 'block';
+    });
+
+    // Add double-click to zoom
+    cy.on('dblclick', 'node', function(e) {
+        const node = e.target;
+        cy.animate({
+            zoom: 2,
+            center: { eles: node }
+        }, {
+            duration: 500
+        });
+    });
+
+    // Initial layout
+    cy.layout({ name: 'cola' }).run();
 });
