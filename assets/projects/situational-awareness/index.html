@@ -6,20 +6,32 @@
     <title>Situational Awareness Graph - Don Branson</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="/assets/css/styles.css" rel="stylesheet">
-    <!-- Add these two lines for vis-network -->
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-    <link href="https://unpkg.com/vis-network/styles/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <!-- Cytoscape and plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcola/3.4.0/cola.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cytoscape-cola@2.5.1/cytoscape-cola.min.js"></script>
     <style>
         #graph-container {
             width: 100%;
-            height: 600px;
+            height: 700px;
             border: 1px solid #ddd;
             background-color: white;
+        }
+        .node-tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
         }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
+    <!-- Navigation remains the same -->
     <nav class="bg-white shadow-lg">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
@@ -49,12 +61,14 @@
             <!-- Graph Container -->
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div id="graph-container"></div>
+                <div class="node-tooltip"></div>
                 
                 <!-- Controls -->
                 <div class="mt-4 flex gap-4">
                     <button id="zoomIn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500">Zoom In</button>
                     <button id="zoomOut" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500">Zoom Out</button>
                     <button id="resetView" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-500">Reset View</button>
+                    <button id="toggleLayout" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500">Toggle Layout</button>
                 </div>
             </div>
 
