@@ -1,6 +1,6 @@
-/**
- * Registry of supported event ontologies and their mappings
- */
+// event-analyzer.js
+
+// Move all class definitions to the top
 class OntologyRegistry {
     static ONTOLOGIES = {
         HEO: {
@@ -14,9 +14,6 @@ class OntologyRegistry {
     };
 }
 
-/**
- * Event type definitions with severity levels
- */
 class EventType {
     static TYPES = {
         INCIDENT: 'Incident',
@@ -33,9 +30,6 @@ class EventType {
     };
 }
 
-/**
- * Pattern matching rules for event analysis
- */
 class PatternRegistry {
     constructor() {
         this.patterns = {
@@ -64,9 +58,6 @@ class PatternRegistry {
     }
 }
 
-/**
- * Event analyzer with ontology support
- */
 class EventAnalyzer {
     constructor() {
         this.registry = new PatternRegistry();
@@ -145,29 +136,37 @@ class EventAnalyzer {
         if (event.time?.length) score += 0.3;
         if (event.place?.length) score += 0.3;
         if (event.entities?.length) score += 0.2;
-        return Math.min(score, 1);
+        return Math.min(score + 0.2, 1); // Base confidence of 0.2
     }
 }
 
-// Initialize when the page loads
-window.onload = () => {
-    const analyzer = new EventAnalyzer();
-    const button = document.getElementById('analyzeBtn');
-    const input = document.getElementById('tweetInput');
-    const result = document.getElementById('result');
+// Helper function to generate a human-readable summary
+function generateSummary(analysis) {
+    const parts = [];
+    
+    if (analysis.type) {
+        parts.push(`Type: ${analysis.type}`);
+    }
+    
+    if (analysis.time.length > 0) {
+        const times = analysis.time.map(t => t.value).join(', ');
+        parts.push(`Time: ${times}`);
+    }
+    
+    if (analysis.place.length > 0) {
+        const places = analysis.place.map(p => p.value).join(', ');
+        parts.push(`Location: ${places}`);
+    }
+    
+    if (analysis.entities.length > 0) {
+        const entities = analysis.entities.map(e => `${e.type}: ${e.value}`).join(', ');
+        parts.push(`Entities: ${entities}`);
+    }
+    
+    return parts.join(' | ');
+}
 
-    button.onclick = async () => {
-        try {
-            const tweet = input.value;
-            const analysis = await analyzer.analyzeTweet(tweet);
-            result.innerHTML = JSON.stringify(analysis, null, 2);
-        } catch (error) {
-            result.innerHTML = `Error: ${error.message}`;
-        }
-    };
-};
-
-// Initialize when the page loads
+// Single window.onload handler at the bottom
 window.onload = () => {
     const analyzer = new EventAnalyzer();
     const button = document.getElementById('analyzeBtn');
@@ -193,32 +192,6 @@ window.onload = () => {
             result.classList.add('text-red-600');
         }
     };
-
-    // Helper function to generate a human-readable summary
-    function generateSummary(analysis) {
-        const parts = [];
-        
-        if (analysis.type) {
-            parts.push(`Type: ${analysis.type}`);
-        }
-        
-        if (analysis.time.length > 0) {
-            const times = analysis.time.map(t => t.value).join(', ');
-            parts.push(`Time: ${times}`);
-        }
-        
-        if (analysis.place.length > 0) {
-            const places = analysis.place.map(p => p.value).join(', ');
-            parts.push(`Location: ${places}`);
-        }
-        
-        if (analysis.entities.length > 0) {
-            const entities = analysis.entities.map(e => `${e.type}: ${e.value}`).join(', ');
-            parts.push(`Entities: ${entities}`);
-        }
-        
-        return parts.join(' | ');
-    }
 
     // Initial analysis on page load
     button.click();
