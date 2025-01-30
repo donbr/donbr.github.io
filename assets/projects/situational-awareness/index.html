@@ -9,7 +9,11 @@
     <!-- Cytoscape and plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcola/3.4.0/cola.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cytoscape-cola@2.5.1/cytoscape-cola.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-cola/cytoscape-cola.js"></script>
+    <script>
+        // Register the cola layout
+        cytoscape.use(cytoscapeCola);
+    </script>
     <style>
         #graph-container {
             width: 100%;
@@ -31,7 +35,7 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation remains the same -->
+    <!-- Navigation -->
     <nav class="bg-white shadow-lg">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
@@ -98,7 +102,7 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8 mt-8">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <p>&copy; 2024 Don Branson. All rights reserved.</p>
+            <p>&copy; 2025 Don Branson. All rights reserved.</p>
         </div>
     </footer>
 

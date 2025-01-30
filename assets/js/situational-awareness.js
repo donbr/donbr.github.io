@@ -1,4 +1,3 @@
-// situational-awareness.js
 document.addEventListener('DOMContentLoaded', async function() {
     // Load the graph data
     const response = await fetch('/assets/js/situational-awareness-graph.json');
@@ -27,31 +26,35 @@ document.addEventListener('DOMContentLoaded', async function() {
         edges: graphData.edges.map(edge => ({
             data: {
                 source: edge.source,
-                target: edge.target
+                target: edge.target,
+                // Assign a default color; customize as needed
+                edgeColor: '#6b7280'
             }
         }))
     };
     
     // Helper function to determine node size based on available metrics
     function getNodeSize(node) {
-        if (node['Incident Response Time']) return node['Incident Response Time'] / 2;
-        if (node['Detection Rate']) return node['Detection Rate'] * 80;
-        if (node['Disruption Impact']) return node['Disruption Impact'] * 80;
-        if (node['Anomaly Accuracy']) return node['Anomaly Accuracy'] * 80;
-        if (node['Decision Accuracy']) return node['Decision Accuracy'] * 80;
-        return 40; // default size for nodes without metrics
+        const scaleFactor = 50; // Adjust scaling
+        let metric = 40; // Default size
+        if (node['Incident Response Time']) metric = node['Incident Response Time'] / 4;
+        else if (node['Detection Rate']) metric = node['Detection Rate'] * scaleFactor;
+        else if (node['Disruption Impact']) metric = node['Disruption Impact'] * scaleFactor;
+        else if (node['Anomaly Accuracy']) metric = node['Anomaly Accuracy'] * scaleFactor;
+        else if (node['Decision Accuracy']) metric = node['Decision Accuracy'] * scaleFactor;
+        return Math.min(Math.max(metric, 20), 100); // Keep size within [20,100]
     }
-    
-    // Helper function to assign colors based on node type
+
+    // Helper function to determine node color based on ID
     function getNodeColor(id) {
-        const colors = {
-            'Disaster Response': '#ef4444',           // red
-            'Cybersecurity Threat Propagation': '#22c55e', // green
-            'Supply Chain Disruption': '#3b82f6',     // blue
-            'Public Safety Real-Time Anomaly Detection': '#f59e0b', // amber
-            'Military Operations Causal Reasoning': '#8b5cf6'  // purple
+        const colorMap = {
+            'Disaster Response': '#1f77b4',
+            'Cybersecurity Threat Propagation': '#ff7f0e',
+            'Supply Chain Disruption': '#2ca02c',
+            'Public Safety Real-Time Anomaly Detection': '#d62728',
+            'Military Operations Causal Reasoning': '#9467bd'
         };
-        return colors[id] || '#94a3b8'; // default gray for other nodes
+        return colorMap[id] || '#7f7f7f'; // Default color for unspecified nodes
     }
 
     // Initialize Cytoscape
@@ -62,36 +65,39 @@ document.addEventListener('DOMContentLoaded', async function() {
             {
                 selector: 'node',
                 style: {
-                    'label': 'data(label)',
-                    'text-wrap': 'wrap',
-                    'text-max-width': '100px',
-                    'font-size': '12px',
-                    'text-valign': 'center',
-                    'text-halign': 'center',
                     'background-color': 'data(color)',
-                    'border-width': 2,
-                    'border-color': '#4f46e5',
+                    'label': 'data(label)',
                     'width': 'data(size)',
                     'height': 'data(size)',
+                    'text-valign': 'center',
+                    'text-halign': 'center',
+                    'color': '#fff',
+                    'font-size': 10,
+                    'overlay-padding': '6px',
+                    'z-index': 10
                 }
             },
             {
                 selector: 'edge',
                 style: {
                     'width': 2,
-                    'line-color': '#94a3b8',
-                    'target-arrow-color': '#94a3b8',
+                    'line-color': 'data(edgeColor)',
+                    'target-arrow-color': 'data(edgeColor)',
                     'target-arrow-shape': 'triangle',
                     'curve-style': 'bezier'
                 }
             },
             {
-                selector: ':selected',
+                selector: 'node:selected',
                 style: {
-                    'background-color': '#f59e0b',
-                    'border-color': '#d97706',
-                    'line-color': '#f59e0b',
-                    'target-arrow-color': '#f59e0b'
+                    'border-width': 3,
+                    'border-color': '#333'
+                }
+            },
+            {
+                selector: 'edge:selected',
+                style: {
+                    'width': 4
                 }
             }
         ],
@@ -99,42 +105,42 @@ document.addEventListener('DOMContentLoaded', async function() {
             name: 'cola',
             animate: true,
             nodeSpacing: 120,
-            edgeLengthVal: 100,
+            edgeLength: function(edge) { return 100; },
             maxSimulationTime: 3000
         }
     });
 
-    // Calculate node degrees for sizing
-    cy.nodes().forEach(node => {
-        node.data('degree', node.degree());
-    });
-
-    // Add tooltips
+    // Tooltip handling
     const tooltip = document.querySelector('.node-tooltip');
-    cy.on('mouseover', 'node', function(e) {
-        const node = e.target;
-        const pos = e.renderedPosition;
-        const data = node.data();
-        
-        // Build tooltip content
-        let content = `<strong>${data.label}</strong><br>`;
-        for (const [key, value] of Object.entries(data)) {
-            if (key !== 'id' && key !== 'label') {
-                content += `${key}: ${typeof value === 'number' ? value.toFixed(2) : value}<br>`;
-            }
+    cy.on('mouseover', 'node', (event) => {
+        const node = event.target;
+        const metrics = [
+            { label: 'Incident Response Time', value: node.data('incidentResponseTime') },
+            { label: 'Coordination', value: node.data('coordination') },
+            { label: 'Detection Rate', value: node.data('detectionRate') },
+            { label: 'Response Time', value: node.data('responseTime') },
+            { label: 'Disruption Impact', value: node.data('disruptionImpact') },
+            { label: 'Anomaly Accuracy', value: node.data('anomalyAccuracy') },
+            { label: 'Decision Accuracy', value: node.data('decisionAccuracy') }
+        ].filter(metric => metric.value !== undefined);
+
+        if (metrics.length > 0) {
+            tooltip.innerHTML = `<strong>${node.data('label')}</strong><br>` +
+                metrics.map(metric => `${metric.label}: ${metric.value.toFixed(2)}`).join('<br>');
+            tooltip.style.display = 'block';
         }
-        
-        tooltip.innerHTML = content;
-        tooltip.style.left = `${pos.x + 10}px`;
-        tooltip.style.top = `${pos.y + 10}px`;
-        tooltip.style.display = 'block';
     });
 
-    cy.on('mouseout', 'node', function() {
+    cy.on('mouseout', 'node', () => {
         tooltip.style.display = 'none';
     });
 
-    // Add zoom controls
+    cy.on('mousemove', (event) => {
+        tooltip.style.left = (event.renderedPosition.x + 10) + 'px';
+        tooltip.style.top = (event.renderedPosition.y + 10) + 'px';
+    });
+
+    // Zoom controls
     document.getElementById('zoomIn').addEventListener('click', () => {
         cy.zoom({
             level: cy.zoom() * 1.2,
@@ -151,56 +157,25 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     document.getElementById('resetView').addEventListener('click', () => {
         cy.fit();
-        cy.center();
+        cy.zoom(1);
     });
 
+    // Layout toggle
     let usingCola = true;
     document.getElementById('toggleLayout').addEventListener('click', () => {
-        const layout = usingCola ? 
-            { name: 'concentric', minNodeSpacing: 100 } : 
-            { name: 'cola', nodeSpacing: 120, edgeLengthVal: 100 };
-        
+        let layout;
+        if (usingCola) {
+            layout = { name: 'concentric', minNodeSpacing: 100 };
+        } else {
+            layout = { 
+                name: 'cola',
+                animate: true,
+                nodeSpacing: 120,
+                edgeLength: function(edge) { return 100; },
+                maxSimulationTime: 3000
+            };
+        }
         cy.layout(layout).run();
         usingCola = !usingCola;
     });
-
-    cy.on('mouseover', 'node', function(e) {
-        const node = e.target.data();
-        let content = `<strong>${node.label}</strong><br>`;
-        
-        if (node.incidentResponseTime) 
-            content += `Incident Response Time: ${node.incidentResponseTime.toFixed(2)}<br>`;
-        if (node.coordination) 
-            content += `Coordination: ${node.coordination.toFixed(2)}<br>`;
-        if (node.detectionRate) 
-            content += `Detection Rate: ${node.detectionRate.toFixed(2)}<br>`;
-        if (node.responseTime) 
-            content += `Response Time: ${node.responseTime.toFixed(2)}<br>`;
-        if (node.disruptionImpact) 
-            content += `Disruption Impact: ${node.disruptionImpact.toFixed(2)}<br>`;
-        if (node.anomalyAccuracy) 
-            content += `Anomaly Accuracy: ${node.anomalyAccuracy.toFixed(2)}<br>`;
-        if (node.decisionAccuracy) 
-            content += `Decision Accuracy: ${node.decisionAccuracy.toFixed(2)}<br>`;
-        
-        tooltip.innerHTML = content;
-        const pos = e.renderedPosition;
-        tooltip.style.left = `${pos.x + 10}px`;
-        tooltip.style.top = `${pos.y + 10}px`;
-        tooltip.style.display = 'block';
-    });
-
-    // Add double-click to zoom
-    cy.on('dblclick', 'node', function(e) {
-        const node = e.target;
-        cy.animate({
-            zoom: 2,
-            center: { eles: node }
-        }, {
-            duration: 500
-        });
-    });
-
-    // Initial layout
-    cy.layout({ name: 'cola' }).run();
 });
