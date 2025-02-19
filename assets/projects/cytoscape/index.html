@@ -1,248 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STRING Network Viewer</title>
-  <!-- Updated to Cytoscape v3.31.0 -->
-  <script src="https://unpkg.com/cytoscape@3.31.0/dist/cytoscape.min.js"></script>
-  <link href="/assets/css/styles.css" rel="stylesheet">
-  <style>
-    #title {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .controls {
-      margin-bottom: 10px;
-    }
-    #cy {
-      width: 100%;
-      height: 600px;
-      display: block;
-      border: 1px solid #ddd;
-    }
-    #info {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      background: white;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      max-width: 300px;
-      display: none;
-    }
-    #error-message {
-      position: absolute;
-      left: 20px;
-      top: 20px;
-      background: #f8d7da;
-      color: #721c24;
-      padding: 10px;
-      border: 1px solid #f5c6cb;
-      border-radius: 4px;
-      display: none;
-    }
-  </style>
-</head>
-<body class="bg-gray-50">
-  <!-- Navigation -->
-  <nav class="bg-white shadow-lg">
-    <div class="max-w-6xl mx-auto px-4">
-        <div class="flex justify-between">
-            <div class="flex space-x-7">
-                <div>
-                    <a href="/" class="flex items-center py-4">
-                        <span class="font-semibold text-gray-700 text-lg">Don Branson</span>
-                    </a>
-                </div>
-            </div>
-            <div class="flex items-center space-x-3">
-                <a href="/assets/projects/" class="py-4 px-2 text-gray-500 hover:text-gray-900">← Back to Projects</a>
-            </div>
-        </div>
-    </div>
-  </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STRING Network Viewer - Don Branson</title>
+    <script src="https://unpkg.com/cytoscape@3.31.0/dist/cytoscape.min.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link href="/assets/css/styles.css" rel="stylesheet" />
 
-  <div id="title"></div>
-  <div class="controls">
-    <button id="fit">Fit</button>
-    <button id="showAll">Show All Properties</button>
-  </div>
-  <div id="cy"></div>
-  <div id="info"></div>
-  <div id="error-message"></div>
-
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8 mt-8">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-        <p>&copy; 2025 Don Branson. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', async function() {
-      const titleDiv = document.getElementById('title');
-      const infoBox = document.getElementById('info');
-      const errorMessage = document.getElementById('error-message');
-      let networkData;
-      
-      try {
-        const response = await fetch('/assets/js/string.cyjs');
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        networkData = await response.json();
-        if (!networkData?.elements) {
-          throw new Error("Invalid network data format");
-        }
-        // Optionally set the title using network metadata
-        if (networkData.data) {
-          titleDiv.innerHTML = `<h2>${networkData.data.network_type} - ${networkData.data.species}</h2>`;
-        }
-      } catch (e) {
-        console.error("Error loading network data:", e);
-        errorMessage.innerHTML = `<h2>Error Loading Network</h2><p>${e.message}</p>`;
-        errorMessage.style.display = 'block';
-        return;
+    <style>
+      #title {
+        text-align: center;
+        margin-bottom: 20px;
       }
-      
-      const cy = cytoscape({
-        container: document.getElementById('cy'),
-        elements: networkData.elements,
-        style: [
-          {
-            selector: 'node',
-            style: {
-              'label': 'data(display_name)',
-              'background-color': 'data(stringdb_node_color)',
-              'text-outline-width': 2,
-              'text-outline-color': 'white',
-              'text-valign': 'center',
-              'text-halign': 'center',
-              'width': 50,
-              'height': 50,
-              'font-size': '12px',
-              'text-wrap': 'wrap'
-            }
-          },
-          {
-            selector: 'edge',
-            style: {
-              'width': 'mapData(stringdb_score, 0, 1, 1, 8)',
-              'line-color': '#666',
-              'curve-style': 'bezier',
-              'opacity': 0.8,
-              'label': 'data(stringdb_score)',
-              'text-rotation': 'autorotate',
-              'text-opacity': 0,
-              'font-size': '10px'
-            }
-          },
-          {
-            selector: 'edge:selected',
-            style: {
-              'text-opacity': 1,
-              'line-color': '#333',
-              'width': 'mapData(stringdb_score, 0, 1, 2, 10)'
-            }
-          },
-          {
-            selector: 'node:selected',
-            style: {
-              'border-width': 3,
-              'border-color': '#333'
-            }
-          },
-          {
-            selector: 'node:active',
-            style: {
-              'overlay-opacity': 0.3,
-              'overlay-color': '#000'
-            }
-          }
-        ],
-        layout: {
-          name: 'cose',
-          idealEdgeLength: 100,
-          nodeOverlap: 20,
-          refresh: 20,
-          fit: true,
-          padding: 30,
-          randomize: false,
-          componentSpacing: 100,
-          nodeRepulsion: 400000,
-          edgeElasticity: 100,
-          nestingFactor: 5,
-          gravity: 80,
-          numIter: 1000,
-          initialTemp: 200,
-          coolingFactor: 0.95,
-          minTemp: 1.0
-        },
-        minZoom: 0.2,
-        maxZoom: 3,
-        wheelSensitivity: 0.3,
-        boxSelectionEnabled: true,
-        selectionType: 'single'
-      });
-      
-      // Node tap: show detailed information
-      cy.on('tap', 'node', function(evt) {
-        const data = evt.target.data();
-        let infoHtml = `
-          <h3>${data.display_name}</h3>
-          <p><strong>Description:</strong> ${data.stringdb_description}</p>
-          <p><strong>Family:</strong> ${data.target_family}</p>
-          <p><strong>Development Level:</strong> ${data.target_development_level}</p>
-          <hr>
-          <p><strong>Expression Levels:</strong></p>
-          <ul>
-            <li>Brain: ${data.tissue_nervous_system ?? 'N/A'}</li>
-            <li>Heart: ${data.tissue_heart ?? 'N/A'}</li>
-            <li>Liver: ${data.tissue_liver ?? 'N/A'}</li>
-            <li>Kidney: ${data.tissue_kidney ?? 'N/A'}</li>
-          </ul>
-        `;
-        infoBox.innerHTML = infoHtml;
-        infoBox.style.display = 'block';
-      });
-      
-      // Edge tap: show interaction details
-      cy.on('tap', 'edge', function(evt) {
-        const data = evt.target.data();
-        let infoHtml = `
-          <h3>Interaction Details</h3>
-          <p><strong>Combined Score:</strong> ${data.stringdb_score}</p>
-          <p><strong>Evidence Types:</strong></p>
-          <ul>
-            <li>Experiments: ${data.stringdb_experiments ?? 'N/A'}</li>
-            <li>Database: ${data.stringdb_databases ?? 'N/A'}</li>
-            <li>Textmining: ${data.stringdb_textmining ?? 'N/A'}</li>
-            <li>Coexpression: ${data.stringdb_coexpression ?? 'N/A'}</li>
-          </ul>
-        `;
-        infoBox.innerHTML = infoHtml;
-        infoBox.style.display = 'block';
-      });
-      
-      // Hide info box when background is tapped
-      cy.on('tap', function(evt) {
-        if (evt.target === cy) {
-          infoBox.style.display = 'none';
-        }
-      });
-      
-      // Fit button handler
-      document.getElementById('fit').addEventListener('click', () => {
-        cy.fit();
-      });
-      
-      // "Show All Properties" button handler (currently a placeholder)
-      document.getElementById('showAll').addEventListener('click', () => {
-        alert("Show All Properties functionality is not implemented yet.");
-      });
-    });
-  </script>
-</body>
+      .controls {
+        margin-bottom: 10px;
+      }
+      #cy {
+        width: 100%;
+        height: 600px;
+        display: block;
+        border: 1px solid #ddd;
+      }
+      #info {
+        position: fixed; /* Changed from absolute to fixed */
+        right: 20px;
+        top: 20px;
+        background: white;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        max-width: 300px;
+        max-height: calc(100vh - 40px); /* Prevent extending beyond viewport */
+        overflow-y: auto; /* Allow scrolling if content is too long */
+        display: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000; /* Ensure it stays above other content */
+      }
+
+      /* Add a close button for better UX */
+      #info .close-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        padding: 5px;
+      }
+
+      /* Make sure the content is readable */
+      #info h3 {
+        margin-top: 0;
+        padding-right: 20px; /* Space for close button */
+      }
+
+      #error-message {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        background: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between">
+          <div class="flex space-x-7">
+            <div>
+              <a href="/" class="flex items-center py-4">
+                <span class="font-semibold text-gray-700 text-lg"
+                  >Don Branson</span
+                >
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <a
+              href="/assets/projects/"
+              class="py-4 px-2 text-gray-500 hover:text-gray-900"
+              >← Back to Projects</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Project Content -->
+    <div class="bg-white py-8">
+      <div class="max-w-6xl mx-auto px-4">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">
+          STRING Network Viewer
+        </h1>
+        <p class="text-gray-600 mb-8">
+          Interactive visualization of protein-protein interaction networks
+          using Cytoscape.js. This tool allows exploration of complex biological
+          networks with detailed protein information and interaction data.
+        </p>
+
+        <!-- Visualization Container -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div id="title"></div>
+          <div id="cy"></div>
+          <div class="controls space-x-4">
+            <button
+              id="fit"
+              class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500"
+            >
+              Fit View
+            </button>
+            <button
+              id="showAll"
+              class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-500"
+            >
+              Show All Properties
+            </button>
+          </div>
+          <div id="info"></div>
+          <div id="error-message"></div>
+        </div>
+
+        <!-- Technical Details -->
+        <div class="mt-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">
+            Implementation Details
+          </h2>
+          <div class="prose max-w-none">
+            <p class="text-gray-600 mb-4">
+              This visualization leverages several key technologies and
+              features:
+            </p>
+            <ul class="list-disc pl-6 text-gray-600 space-y-2">
+              <li>Cytoscape.js for network visualization and interaction</li>
+              <li>
+                Dynamic loading and parsing of STRING database network data
+              </li>
+              <li>Interactive node and edge information display</li>
+              <li>
+                Customizable layout algorithms for optimal network arrangement
+              </li>
+              <li>
+                Detailed protein information including expression levels and
+                descriptions
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-8">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <p>&copy; 2025 Don Branson. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="/assets/js/cytoscape-viewer.js"></script>
+  </body>
 </html>
