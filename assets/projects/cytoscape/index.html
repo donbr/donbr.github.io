@@ -8,11 +8,6 @@
   <script src="https://unpkg.com/cytoscape@3.31.0/dist/cytoscape.min.js"></script>
   <link href="/assets/css/styles.css" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: helvetica, sans-serif;
-    }
     #title {
       text-align: center;
       margin-bottom: 20px;
@@ -50,7 +45,25 @@
     }
   </style>
 </head>
-<body>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between">
+            <div class="flex space-x-7">
+                <div>
+                    <a href="/" class="flex items-center py-4">
+                        <span class="font-semibold text-gray-700 text-lg">Don Branson</span>
+                    </a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="/assets/projects/" class="py-4 px-2 text-gray-500 hover:text-gray-900">← Back to Projects</a>
+            </div>
+        </div>
+    </div>
+  </nav>
+
   <div id="title"></div>
   <div class="controls">
     <button id="fit">Fit</button>
@@ -59,6 +72,13 @@
   <div id="cy"></div>
   <div id="info"></div>
   <div id="error-message"></div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+        <p>&copy; 2025 Don Branson. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', async function() {

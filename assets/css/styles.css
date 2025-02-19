@@ -1,56 +1,5 @@
 /* Global Styles */
-body {
-    margin: 0;
-    padding: 20px;
-    font-family: helvetica, sans-serif;
-}
 
-/* Title styling */
-#title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Control styling */
-.controls {
-    margin-bottom: 10px;
-}
-
-/* Cytoscape container */
-#cy {
-    width: 100%;
-    height: 600px;
-    display: block;
-    border: 1px solid #ddd;
-}
-
-/* Info panel styling */
-#info {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    background: white;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    max-width: 300px;
-    display: none;
-}
-
-/* Error message styling */
-#error-message {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-    background: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border: 1px solid #f5c6cb;
-    border-radius: 4px;
-    display: none;
-}
-
-/* Additional reusable styles (from previous updates) */
 .project-card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
