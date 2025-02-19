@@ -1,4 +1,56 @@
-/* Custom styles for the portfolio site */
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: helvetica, sans-serif;
+}
+
+/* Title styling */
+#title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Control styling */
+.controls {
+    margin-bottom: 10px;
+}
+
+/* Cytoscape container */
+#cy {
+    width: 100%;
+    height: 600px;
+    display: block;
+    border: 1px solid #ddd;
+}
+
+/* Info panel styling */
+#info {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-width: 300px;
+    display: none;
+}
+
+/* Error message styling */
+#error-message {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    display: none;
+}
+
+/* Additional reusable styles (from previous updates) */
 .project-card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
@@ -15,4 +67,19 @@
 .skill-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional tooltip styling for Cytoscape elements, if needed */
+.cytoscape-tooltip {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 300px;
+    font-family: 'Segoe UI', system-ui;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    border: 1px solid #dee2e6;
+    display: none;
 }
