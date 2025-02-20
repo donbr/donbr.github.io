@@ -83,6 +83,26 @@ const ListCard = ({ title, items, type = "simple" }) => {
   );
 };
 
+// Quotation Card component for displaying quotes in the metadata section
+const QuotationCard = ({ quotations }) => {
+  if (!quotations || quotations.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="bg-white p-4 rounded-lg shadow mb-4">
+      <h3 className="font-semibold text-gray-700 mb-2">Key Quotations</h3>
+      <div className="space-y-3">
+        {quotations.map((quote, idx) => (
+          <div key={idx} className="text-gray-700 italic border-l-4 border-gray-300 pl-4 py-1">
+            "{quote}"
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 // Tone Analysis component using a standardized scale.
 const ToneAnalysis = ({ tone }) => {
   if (!tone) {
@@ -183,24 +203,31 @@ const GdeltRecordViewer = () => {
   const renderMetadataGrid = (metadata) => (
     <div className="overflow-x-auto">
       <div className="grid grid-cols-2 gap-4">
-        {Object.entries(metadata).map(([key, value]) => (
-          <div key={key} className="text-gray-700">
-            <span className="font-semibold">{key}:</span>{" "}
-            {key === "documentIdentifier" ? (
-              <a
-                href={value}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 underline"
-              >
-                {value}
-              </a>
-            ) : (
-              <span>{value}</span>
-            )}
-          </div>
-        ))}
+        {Object.entries(metadata).map(([key, value]) => {
+          if (key === "quotations") return null; // Skip quotations, we'll render them separately
+          
+          return (
+            <div key={key} className="text-gray-700">
+              <span className="font-semibold">{key}:</span>{" "}
+              {key === "documentIdentifier" ? (
+                <a
+                  href={value}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline"
+                >
+                  {value}
+                </a>
+              ) : (
+                <span>{value}</span>
+              )}
+            </div>
+          );
+        })}
       </div>
+      
+      {/* Render the quotations separately if they exist */}
+      {metadata.quotations && <QuotationCard quotations={metadata.quotations} />}
     </div>
   );
 
