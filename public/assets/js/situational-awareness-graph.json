@@ -1,0 +1,220 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+        {
+            "Incident Response Time": 46.939943809769815,
+            "Coordination": 0.5171317043382344,
+            "id": "Disaster Response"
+        },
+        {
+            "Detection Rate": 0.5587267663837368,
+            "Response Time": 56.95664929621244,
+            "id": "Cybersecurity Threat Propagation"
+        },
+        {
+            "Disruption Impact": 0.6636652127205749,
+            "id": "Supply Chain Disruption"
+        },
+        {
+            "Anomaly Accuracy": 0.9894420954073413,
+            "id": "Public Safety Real-Time Anomaly Detection"
+        },
+        {
+            "Decision Accuracy": 0.9378052990050572,
+            "id": "Military Operations Causal Reasoning"
+        },
+        {
+            "id": "FEMA Disaster Declarations"
+        },
+        {
+            "id": "Critical Infrastructure"
+        },
+        {
+            "id": "Emergency Response Units"
+        },
+        {
+            "id": "Historical Data"
+        },
+        {
+            "id": "Recent Cyber Attacks"
+        },
+        {
+            "id": "Indirect Connections"
+        },
+        {
+            "id": "Threat Intelligence Feeds"
+        },
+        {
+            "id": "Data Sources"
+        },
+        {
+            "id": "Recent Disruptions"
+        },
+        {
+            "id": "Impacts"
+        },
+        {
+            "id": "Alternative Suppliers"
+        },
+        {
+            "id": "Advancements in Anomaly Detection"
+        },
+        {
+            "id": "Real-Time Data Sources"
+        },
+        {
+            "id": "Case Studies"
+        },
+        {
+            "id": "Advancements in AI"
+        },
+        {
+            "id": "AI and Machine Learning"
+        },
+        {
+            "id": "Real-time Monitoring Systems"
+        },
+        {
+            "id": "Data Sharing and Integration"
+        },
+        {
+            "id": "Supplier Diversity and Risk Management"
+        }
+    ],
+    "edges": [
+        {
+            "source": "Disaster Response",
+            "target": "FEMA Disaster Declarations"
+        },
+        {
+            "source": "Disaster Response",
+            "target": "Critical Infrastructure"
+        },
+        {
+            "source": "Disaster Response",
+            "target": "Emergency Response Units"
+        },
+        {
+            "source": "Disaster Response",
+            "target": "Historical Data"
+        },
+        {
+            "source": "Cybersecurity Threat Propagation",
+            "target": "Recent Cyber Attacks"
+        },
+        {
+            "source": "Cybersecurity Threat Propagation",
+            "target": "Indirect Connections"
+        },
+        {
+            "source": "Cybersecurity Threat Propagation",
+            "target": "Threat Intelligence Feeds"
+        },
+        {
+            "source": "Cybersecurity Threat Propagation",
+            "target": "Data Sources"
+        },
+        {
+            "source": "Supply Chain Disruption",
+            "target": "Recent Disruptions"
+        },
+        {
+            "source": "Supply Chain Disruption",
+            "target": "Impacts"
+        },
+        {
+            "source": "Supply Chain Disruption",
+            "target": "Alternative Suppliers"
+        },
+        {
+            "source": "Supply Chain Disruption",
+            "target": "Historical Data"
+        },
+        {
+            "source": "Public Safety Real-Time Anomaly Detection",
+            "target": "Advancements in Anomaly Detection"
+        },
+        {
+            "source": "Public Safety Real-Time Anomaly Detection",
+            "target": "Real-Time Data Sources"
+        },
+        {
+            "source": "Public Safety Real-Time Anomaly Detection",
+            "target": "Case Studies"
+        },
+        {
+            "source": "Public Safety Real-Time Anomaly Detection",
+            "target": "Historical Data"
+        },
+        {
+            "source": "Military Operations Causal Reasoning",
+            "target": "Advancements in AI"
+        },
+        {
+            "source": "Military Operations Causal Reasoning",
+            "target": "Case Studies"
+        },
+        {
+            "source": "Military Operations Causal Reasoning",
+            "target": "Historical Data"
+        },
+        {
+            "source": "AI and Machine Learning",
+            "target": "Disaster Response"
+        },
+        {
+            "source": "AI and Machine Learning",
+            "target": "Cybersecurity Threat Propagation"
+        },
+        {
+            "source": "AI and Machine Learning",
+            "target": "Supply Chain Disruption"
+        },
+        {
+            "source": "AI and Machine Learning",
+            "target": "Public Safety Real-Time Anomaly Detection"
+        },
+        {
+            "source": "AI and Machine Learning",
+            "target": "Military Operations Causal Reasoning"
+        },
+        {
+            "source": "Real-time Monitoring Systems",
+            "target": "Disaster Response"
+        },
+        {
+            "source": "Real-time Monitoring Systems",
+            "target": "Supply Chain Disruption"
+        },
+        {
+            "source": "Real-time Monitoring Systems",
+            "target": "Public Safety Real-Time Anomaly Detection"
+        },
+        {
+            "source": "Data Sharing and Integration",
+            "target": "Disaster Response"
+        },
+        {
+            "source": "Data Sharing and Integration",
+            "target": "Cybersecurity Threat Propagation"
+        },
+        {
+            "source": "Data Sharing and Integration",
+            "target": "Supply Chain Disruption"
+        },
+        {
+            "source": "Data Sharing and Integration",
+            "target": "Public Safety Real-Time Anomaly Detection"
+        },
+        {
+            "source": "Data Sharing and Integration",
+            "target": "Military Operations Causal Reasoning"
+        },
+        {
+            "source": "Supplier Diversity and Risk Management",
+            "target": "Supply Chain Disruption"
+        }
+    ]
+}
