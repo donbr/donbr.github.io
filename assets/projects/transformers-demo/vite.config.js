@@ -1,7 +1,7 @@
 import path from 'path';
 
 // Needed for deploying to GitHub pages
-const BASE_PATH = process.env.BASE_PATH ?? '';
+const BASE_PATH = "/assets/projects/transformers-demo/";
 
 export default {
     // config options
