@@ -1,6 +1,6 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useProjectById } from '../../services/projectService';
+import { useProjectById } from '../../features/projects/projectService';
 import ErrorBoundary from '../../components/common/ErrorBoundary';
 
 // Lazy load project components
@@ -8,8 +8,9 @@ const GdeltViewer = lazy(() => import('../../components/projects/GdeltViewer'));
 const CytoscapeViewer = lazy(() => import('../../components/projects/CytoscapeViewer'));
 const EventAnalyzer = lazy(() => import('../../components/projects/EventAnalyzer'));
 const SituationalAwareness = lazy(() => import('../../components/projects/SituationalAwareness'));
+const TransformersDemo = lazy(() => import('../../components/projects/TransformersDemo'));
 
-interface ProjectParams {
+interface ProjectParams extends Record<string, string> {
   projectId: string;
 }
 
@@ -28,7 +29,8 @@ const ProjectDetailPage: React.FC = () => {
     'gdelt': GdeltViewer,
     'cytoscape': CytoscapeViewer,
     'event-analyzer': EventAnalyzer,
-    'situational-awareness': SituationalAwareness
+    'situational-awareness': SituationalAwareness,
+    'transformers-demo': TransformersDemo
   };
   
   useEffect(() => {

@@ -6,25 +6,24 @@ interface Props {
   fallback?: ReactNode;
 }
 
-interface State {
+interface ErrorState {
   hasError: boolean;
-  error: Error | null;
+  error?: Error;
 }
 
 /**
  * Error boundary component to catch JavaScript errors anywhere in child component tree
  * and display a fallback UI instead of crashing the whole app
  */
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends Component<Props, ErrorState> {
   constructor(props: Props) {
     super(props);
     this.state = { 
-      hasError: false,
-      error: null
+      hasError: false
     };
   }
 
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error: Error): ErrorState {
     // Update state so the next render will show the fallback UI
     return { hasError: true, error };
   }
@@ -63,18 +62,7 @@ class ErrorBoundary extends Component<Props, State> {
       
       // Default fallback UI
       return (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-md">
-          <h3 className="text-lg font-semibold text-red-800 mb-2">Something went wrong</h3>
-          <p className="text-red-600 mb-4">
-            There was an error loading this component. Try refreshing the page.
-          </p>
-          <details className="text-sm text-gray-700">
-            <summary className="cursor-pointer">Technical details</summary>
-            <pre className="mt-2 p-2 bg-gray-100 rounded overflow-x-auto">
-              {this.state.error?.toString()}
-            </pre>
-          </details>
-        </div>
+        <div role="alert">Something went wrong. Please try again.</div>
       );
     }
 

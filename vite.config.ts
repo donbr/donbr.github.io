@@ -1,63 +1,31 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import crypto from 'crypto'
 
 export default defineConfig({
-  // Configure base for GitHub Pages deployment
-  base: '/donbr.github.io/',
-  
-  // Add React plugin
-  plugins: [react()],
-  
-  // Resolve aliases for easier imports
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      '@components': resolve(__dirname, 'src/components'),
-      '@assets': resolve(__dirname, 'src/assets'),
-      '@lib': resolve(__dirname, 'src/lib'),
-      '@hooks': resolve(__dirname, 'src/hooks'),
-      '@pages': resolve(__dirname, 'src/pages')
+  plugins: [
+    react(),
+    {
+      name: 'html-transform',
+      transformIndexHtml(html) {
+        const nonce = crypto.randomBytes(16).toString('base64')
+        process.env.VITE_CSP_NONCE = nonce
+        return html.replace(/%NONCE%/g, nonce)
+      },
     }
-  },
-  
-  // Configure build output with optimizations
-  build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-    sourcemap: true, // Enable source maps for debugging
-    cssCodeSplit: true, // Split CSS by chunks
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          // Vendor chunk for node_modules
-          vendor: [
-            'react', 
-            'react-dom', 
-            'react-router-dom'
-          ],
-          // Separate chunks for each major section
-          home: ['./src/pages/home/index.tsx'],
-          projects: ['./src/pages/projects/index.tsx'],
-          projectDetail: ['./src/pages/projectDetail/index.tsx']
-        }
-      }
-    },
-    // Terser options for production
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.logs in production
-      }
+  ],
+  server: {
+    host: true,
+    headers: {
+      'Content-Security-Policy': [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data: https:",
+        "connect-src 'self' https: ws: wss:",
+        "font-src 'self' data:",
+        "frame-src 'self'"
+      ].join('; ')
     }
-  },
-  
-  // CSS optimization
-  css: {
-    devSourcemap: true, // Source maps for CSS in development
-    preprocessorOptions: {
-      scss: {
-        // Add any SCSS options here if needed
-      }
-    }
-  },
-});
+  }
+})

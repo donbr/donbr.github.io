@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Vite Server",
+      "program": "${workspaceFolder}/node_modules/vite/bin/vite.js",
+      "args": ["--host"],
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "preLaunchTask": "npm: dev"
+    }
+  ]
+}
