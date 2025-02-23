@@ -1,8 +1,9 @@
 {
   "name": "donbr-github-io",
+  "type": "module",
   "version": "1.0.0",
   "description": "Don Branson's portfolio website",
-  "type": "module",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,html,css}'",
     "deploy": "gh-pages -d dist",
-    "predeploy": "vite build",
+    "predeploy": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
