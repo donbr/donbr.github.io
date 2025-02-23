@@ -10,7 +10,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Dependency locks (optional)
-package-lock.json
+# package-lock.json
 
 # Vite cache
 .vite/
