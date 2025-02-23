@@ -387,6 +387,8 @@ const GdeltRecordViewer: React.FC = () => {
             </>
           );
         }
+return null; // Prevent fallthrough to the next case
+
       case "tone":
         return <ToneAnalysis tone={versionData.tone} />;
       case "map":

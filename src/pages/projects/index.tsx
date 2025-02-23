@@ -1,4 +1,3 @@
-import React from 'react';
 import ProjectCard from '../../components/common/ProjectCard';
 import { useAllProjects } from '../../features/projects/projectService';
 import ErrorBoundary from '../../components/common/ErrorBoundary';

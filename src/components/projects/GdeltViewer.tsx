@@ -1,4 +1,3 @@
-import React from 'react';
 import ErrorBoundary from '../common/ErrorBoundary';
 import GdeltRecordViewer from '../../lib/gdelt-gkg';
 

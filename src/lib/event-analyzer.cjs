@@ -9,19 +9,19 @@
  * event types, and properties in the system. Additional ontologies can be added
  * here to support more complex semantic relationships.
  */
-class OntologyRegistry {
-    // Static property containing available ontologies.
-    static ONTOLOGIES = {
-        HEO: {
-            relationships: ['causes', 'effects', 'participates_in'],
-            eventTypes: ['historical', 'causal', 'participatory']
-        },
-        EVENT_ONTOLOGY: {
-            relationships: ['sub_event', 'parallel_event', 'sequential_event'],
-            properties: ['duration', 'frequency', 'scale']
-        }
-    };
-}
+// class OntologyRegistry {
+//     // Static property containing available ontologies.
+//     static ONTOLOGIES = {
+//         HEO: {
+//             relationships: ['causes', 'effects', 'participates_in'],
+//             eventTypes: ['historical', 'causal', 'participatory']
+//         },
+//         EVENT_ONTOLOGY: {
+//             relationships: ['sub_event', 'parallel_event', 'sequential_event'],
+//             properties: ['duration', 'frequency', 'scale']
+//         }
+//     };
+// }
 
 /**
  * EventType defines constants for categorizing events and their severity.
