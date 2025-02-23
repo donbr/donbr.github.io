@@ -14,6 +14,7 @@ export default defineConfig({
       },
     }
   ],
+  base: '/donbr.github.io/',
   server: {
     host: true,
     headers: {
