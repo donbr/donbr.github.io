@@ -15,6 +15,11 @@ export default defineConfig({
     }
   ],
   base: '/donbr.github.io/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'static',
+    sourcemap: true
+  },
   server: {
     host: true,
     headers: {
