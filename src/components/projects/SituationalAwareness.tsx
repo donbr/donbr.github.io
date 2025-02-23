@@ -12,19 +12,19 @@ declare global {
 const SituationalAwareness: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Retrieve nonce from meta tag if available
-  const nonce = document.querySelector('meta[nonce]')?.getAttribute('nonce') || '';
+  // // Retrieve nonce from meta tag if available
+  // const nonce = document.querySelector('meta[nonce]')?.getAttribute('nonce') || '';
 
   // Load ECharts using the useScript hook
   const echartsScriptStatus = useScript(
     'https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js',
-    { async: true, nonce }
+    { async: true }
   );
 
   // Load the situational awareness script only after ECharts is ready
   const situationalScriptStatus = useScript(
     echartsScriptStatus === 'ready' ? viewerScriptUrl : null,
-    { async: true, nonce }
+    { async: true }
   );
 
   useEffect(() => {
