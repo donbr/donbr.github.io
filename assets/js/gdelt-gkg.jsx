@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import L from 'leaflet'; // Assuming you're using the Leaflet library
+
 const { useState, useEffect } = React;
 
 // A simple MapView component using Leaflet to render location markers.

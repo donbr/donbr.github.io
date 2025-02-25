@@ -1,7 +1,7 @@
 // src/components/projects/situational-awareness/useGraphVisualization.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GraphNode, GraphData } from './types';
-import { EChartsOption } from 'echarts-for-react';
+import type { EChartsOption } from 'echarts';
 
 interface UseGraphVisualizationProps {
   graphData: GraphData;
@@ -9,16 +9,29 @@ interface UseGraphVisualizationProps {
 
 export const useGraphVisualization = ({ graphData }: UseGraphVisualizationProps) => {
   const [option, setOption] = useState<EChartsOption | null>(null);
+  
+  // Store node data reference for tooltips
+  const nodeDataRef = useRef<Record<string, GraphNode>>({});
 
   useEffect(() => {
+    // Store nodes by id for tooltip reference
+    const nodeDataMap: Record<string, GraphNode> = {};
+    graphData.nodes.forEach(node => {
+      nodeDataMap[node.id] = node;
+    });
+    nodeDataRef.current = nodeDataMap;
+
     // Convert nodes and edges to ECharts format
-    const nodes = graphData.nodes.map(node => ({
-      id: node.id,
-      name: node.id,
-      symbolSize: getNodeSize(node),
-      itemStyle: { color: getNodeColor(node.id) },
-      value: node, // Store full node data for tooltips
-    }));
+    const nodes = graphData.nodes.map(node => {
+      return {
+        id: node.id,
+        name: node.id,
+        symbolSize: getNodeSize(node),
+        itemStyle: { color: getNodeColor(node.id) },
+        // Don't assign GraphNode directly to value
+        value: node.id
+      };
+    });
     
     const edges = graphData.edges.map(edge => ({
       source: edge.source,
@@ -32,17 +45,34 @@ export const useGraphVisualization = ({ graphData }: UseGraphVisualizationProps)
         left: 'center',
       },
       tooltip: {
-        formatter: function(params: any) {
-          if (params.dataType === 'node') {
-            const data = params.data.value;
-            let tooltipContent = `<strong>${params.name}</strong><br/>`;
+        formatter: function(params: unknown) {
+          // Type guard for node data
+          if (
+            typeof params === 'object' && 
+            params !== null && 
+            'dataType' in params && 
+            params.dataType === 'node' &&
+            'name' in params && 
+            typeof params.name === 'string' &&
+            'data' in params && 
+            typeof params.data === 'object' && 
+            params.data !== null &&
+            'value' in params.data
+          ) {
+            const name = params.name;
+            const nodeId = String(params.data.value);
+            const nodeData = nodeDataRef.current[nodeId];
+            
+            if (!nodeData) return '';
+            
+            let tooltipContent = `<strong>${name}</strong><br/>`;
             
             // Add all metrics for this node
-            Object.keys(data).forEach(key => {
+            Object.keys(nodeData).forEach(key => {
               if (key !== 'id') {
-                const value = typeof data[key] === 'number' 
-                  ? data[key].toFixed(2) 
-                  : data[key];
+                const value = typeof nodeData[key as keyof GraphNode] === 'number' 
+                  ? (nodeData[key as keyof GraphNode] as number).toFixed(2) 
+                  : nodeData[key as keyof GraphNode];
                 tooltipContent += `${key}: ${value}<br/>`;
               }
             });

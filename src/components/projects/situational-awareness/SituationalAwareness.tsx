@@ -6,7 +6,7 @@ import graphData from '@/data/situational-awareness-graph.json';
 import { useGraphVisualization } from './useGraphVisualization';
 import { GraphData } from './types';
 
-const SituationalAwareness: React.FC = () => {  
+const SituationalAwareness: React.FC = () => {
   const { option } = useGraphVisualization({ graphData: graphData as GraphData });
   const chartRef = useRef<ReactECharts>(null);
   const [isClient, setIsClient] = useState(false);
@@ -20,26 +20,40 @@ const SituationalAwareness: React.FC = () => {
   const handleZoomIn = () => {
     const chart = chartRef.current?.getEchartsInstance();
     if (chart) {
-      const currentOption = chart.getOption();
-      const zoom = (currentOption as any).series[0].zoom || 1;
-      chart.setOption({
-        series: [{
-          zoom: zoom * 1.2
-        }]
-      });
+      try {
+        const option = chart.getOption();
+        // Access series as unknown first
+        const seriesOption = (option as unknown as { series?: Array<{ zoom?: number }> });
+        const zoom = seriesOption.series?.[0]?.zoom || 1;
+        
+        chart.setOption({
+          series: [{
+            zoom: zoom * 1.2
+          }]
+        });
+      } catch (error) {
+        console.error('Error adjusting zoom:', error);
+      }
     }
   };
 
   const handleZoomOut = () => {
     const chart = chartRef.current?.getEchartsInstance();
     if (chart) {
-      const currentOption = chart.getOption();
-      const zoom = (currentOption as any).series[0].zoom || 1;
-      chart.setOption({
-        series: [{
-          zoom: zoom * 0.8
-        }]
-      });
+      try {
+        const option = chart.getOption();
+        // Access series as unknown first
+        const seriesOption = (option as unknown as { series?: Array<{ zoom?: number }> });
+        const zoom = seriesOption.series?.[0]?.zoom || 1;
+        
+        chart.setOption({
+          series: [{
+            zoom: zoom * 0.8
+          }]
+        });
+      } catch (error) {
+        console.error('Error adjusting zoom:', error);
+      }
     }
   };
 
@@ -55,14 +69,20 @@ const SituationalAwareness: React.FC = () => {
   const handleToggleLayout = () => {
     const chart = chartRef.current?.getEchartsInstance();
     if (chart) {
-      const currentOption = chart.getOption();
-      const isForceLayout = (currentOption as any).series[0].layout === 'force';
-      
-      chart.setOption({
-        series: [{
-          layout: isForceLayout ? 'circular' : 'force'
-        }]
-      });
+      try {
+        const option = chart.getOption();
+        // Access series as unknown first
+        const seriesOption = (option as unknown as { series?: Array<{ layout?: string }> });
+        const isForceLayout = seriesOption.series?.[0]?.layout === 'force';
+        
+        chart.setOption({
+          series: [{
+            layout: isForceLayout ? 'circular' : 'force'
+          }]
+        });
+      } catch (error) {
+        console.error('Error toggling layout:', error);
+      }
     }
   };
 
@@ -105,7 +125,7 @@ const SituationalAwareness: React.FC = () => {
                   opts={{ renderer: 'canvas' }}
                   onEvents={{
                     // Ensure chart is properly sized after render
-                    'rendered': () => {
+                    'rendered': (): void => {
                       if (chartRef.current) {
                         setTimeout(() => {
                           chartRef.current?.getEchartsInstance().resize();
