@@ -6,8 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d dist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build"
   },
@@ -20,6 +20,7 @@
     "echarts": "^5.6.0",
     "echarts-for-react": "^3.0.2",
     "leaflet": "^1.9.4",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@tailwindcss/postcss": "^4.0.8",
+    "@types/lodash": "^4.17.15",
     "@types/node": "^22.13.5",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
