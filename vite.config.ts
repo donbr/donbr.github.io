@@ -2,9 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-// https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
-  // Base path is only applied during build (for production/GitHub Pages)
+  // For a project site, set base to the repository name
   const base = command === 'build' ? '/donbr.github.io/' : '/'
   
   return {
@@ -12,7 +11,7 @@ export default defineConfig(({ command }) => {
     base,
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve(__dirname, 'src'),
       },
     },
   }
