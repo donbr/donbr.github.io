@@ -26,32 +26,10 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}=========================================${NC}"
-echo -e "${BLUE}  Lightweight React App Bootstrapper    ${NC}"
+echo -e "${BLUE}  Lightweight React App Refactoring      ${NC}"
 echo -e "${BLUE}=========================================${NC}"
 
 read -p "Enter project name (alphanumeric, hyphens and underscores only): " PROJECT_NAME
-
-# Prompt for project name with validation
-# while true; do
-#   read -p "Enter project name (alphanumeric, hyphens and underscores only): " PROJECT_NAME
-#   if [[ ! $PROJECT_NAME =~ ^[a-zA-Z0-9_-.]+$ ]]; then
-#     echo "Error: Project name must contain only letters, numbers, hyphens and underscores."
-#     continue
-#   fi
-  
-#   if [ -d "$PROJECT_NAME" ]; then
-#     read -p "Directory '$PROJECT_NAME' already exists. Overwrite? (y/n): " OVERWRITE
-#     if [[ $OVERWRITE =~ ^[Yy]$ ]]; then
-#       echo "Removing existing directory..."
-#       rm -rf "$PROJECT_NAME"
-#     else
-#       echo "Please choose a different project name."
-#       continue
-#     fi
-#   fi
-  
-#   break
-# done
 
 PROJECT_DIR="./${PROJECT_NAME}"
 
