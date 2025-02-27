@@ -15,6 +15,7 @@ import SituationalAwareness from '@/components/projects/situational-awareness/Si
 // Prototype Graph Explorers
 import TemporalGraphExplorer from '@/pages/TemporalGraphExplorer';
 import CytoscapeGraphExplorer from '@/pages/CytoscapeGraphExplorer';
+import PlaceholderPage from '@/pages/PlaceholderPage';
 
 const App: React.FC = () => {
   return (
@@ -32,6 +33,7 @@ const App: React.FC = () => {
         {/* Prototype Graph Explorers */}
         <Route path="/assets/prototypes/temporal-graph-explorer" element={<TemporalGraphExplorer />} />
         <Route path="/assets/prototypes/cytoscape-graph-explorer" element={<CytoscapeGraphExplorer />} />
+        <Route path="/assets/prototypes/placeholder" element={<PlaceholderPage />} />
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={<NotFoundPage />} />
