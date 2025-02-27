@@ -34,7 +34,7 @@ const App: React.FC = () => {
         <Route path="/assets/projects/placeholder-page" element={<PlaceholderPage />} />
 
         {/* Catch-all route for 404s */}
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<PlaceholderPage />} />
       </Routes>
     </BrowserRouter>
   );
