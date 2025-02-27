@@ -109,6 +109,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const ProjectsPage: React.FC = () => {
   const projects = [
     {
+      title: "Interactive 404 Experience",
+      description: "Creative error page featuring dynamic typing animations, particle effects, and interactive background elements. Demonstrates modern front-end animation techniques with React and CSS.",
+      tags: ["React", "CSS Animation", "Interactive Design", "UX"],
+      demoUrl: "/assets/projects/placeholder-page"
+    },
+    {
       title: "GDELT GKG Viewer",
       description: "An interactive viewer for the GDELT Global Knowledge Graph. Built as a single-page prototype application using React, Tailwind CSS, and Leaflet for map visualizations, it offers a searchable record list, tone analysis, version toggling, and an intuitive user interface for exploring multidimensional data.",
       tags: ["React", "Tailwind CSS", "Leaflet", "Data Visualization"],
@@ -187,12 +193,6 @@ const ProjectsPage: React.FC = () => {
       description: "Advanced network visualization tool built with Cytoscape.js, offering rich interactive features for complex graph data. Includes timeline animation, detailed node inspection, relationship filtering, and customizable visual styling.",
       tags: ["Cytoscape.js", "React", "Network Analysis", "Interactive Visualization"],
       demoUrl: "/assets/projects/cytoscape-graph"
-    },
-    {
-      title: "Interactive 404 Experience",
-      description: "Creative error page featuring dynamic typing animations, particle effects, and interactive background elements. Demonstrates modern front-end animation techniques with React and CSS.",
-      tags: ["React", "CSS Animation", "Interactive Design", "UX"],
-      demoUrl: "/assets/projects/placeholder-page"
     }
   ];
 
