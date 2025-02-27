@@ -52,7 +52,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'Healthcare': 'bg-blue-100 text-blue-800',
     'Research': 'bg-purple-100 text-purple-800',
     'JavaScript': 'bg-blue-100 text-blue-800',
-    'Pattern Matching': 'bg-purple-100 text-purple-800'
+    'Pattern Matching': 'bg-purple-100 text-purple-800',
+    'TypeScript': 'bg-blue-100 text-blue-800',
+    'Graph Visualization': 'bg-purple-100 text-purple-800',
+    'Temporal Analysis': 'bg-yellow-100 text-yellow-800',
+    'Interactive Visualization': 'bg-green-100 text-green-800',
+    'CSS Animation': 'bg-pink-100 text-pink-800',
+    'Interactive Design': 'bg-indigo-100 text-indigo-800',
+    'UX': 'bg-teal-100 text-teal-800'
   };
 
   return (
@@ -168,6 +175,24 @@ const ProjectsPage: React.FC = () => {
       description: "Interactive network visualization for situational awareness scenarios. Visualizes relationships between disaster response, cybersecurity, and supply chain elements.",
       tags: ["Python", "NetworkX", "Graph Analysis"],
       demoUrl: "/assets/projects/situational-awareness"
+    },
+    {
+      title: "Temporal Graph Explorer",
+      description: "An interactive visualization tool for exploring time-based graph data. Features timeline playback controls, node filtering, and detailed property inspection for entities and relationships as they evolve over time.",
+      tags: ["React", "TypeScript", "Graph Visualization", "Temporal Analysis"],
+      demoUrl: "/assets/projects/temporal-graph"
+    },
+    {
+      title: "Cytoscape Graph Explorer",
+      description: "Advanced network visualization tool built with Cytoscape.js, offering rich interactive features for complex graph data. Includes timeline animation, detailed node inspection, relationship filtering, and customizable visual styling.",
+      tags: ["Cytoscape.js", "React", "Network Analysis", "Interactive Visualization"],
+      demoUrl: "/assets/projects/cytoscape-graph"
+    },
+    {
+      title: "Interactive 404 Experience",
+      description: "Creative error page featuring dynamic typing animations, particle effects, and interactive background elements. Demonstrates modern front-end animation techniques with React and CSS.",
+      tags: ["React", "CSS Animation", "Interactive Design", "UX"],
+      demoUrl: "/assets/projects/placeholder-page"
     }
   ];
 

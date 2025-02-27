@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Page Components
 import HomePage from '@/pages/HomePage';
@@ -7,19 +7,19 @@ import ProjectsPage from '@/pages/ProjectsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
 // Project Components
-import GdeltRecordViewer from '@/components/projects/gdelt/GdeltRecordViewer';
+import GdeltRecordViewer from '@/components/projects/gdelt/GdeltRecordViewer'; // Add .jsx extension
 import CytoscapeViewer from '@/components/projects/cytoscape/CytoscapeViewer';
 import EventAnalyzer from '@/components/projects/event-analyzer/EventAnalyzer';
 import SituationalAwareness from '@/components/projects/situational-awareness/SituationalAwareness';
 
 // Prototype Graph Explorers
-import TemporalGraphExplorer from '@/pages/TemporalGraphExplorer';
-import CytoscapeGraphExplorer from '@/pages/CytoscapeGraphExplorer';
-import PlaceholderPage from '@/pages/PlaceholderPage';
+import TemporalGraphExplorer from '@/components/projects/basic-temporal-graph/TemporalGraphExplorer';
+import CytoscapeGraphExplorer from '@/components/projects/cytoscape-temporal-graph/CytoscapeGraphExplorer';
+import PlaceholderPage from '@/components/projects/placeholder-page/PlaceholderPage';
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/assets/projects" element={<ProjectsPage />} />
@@ -29,16 +29,14 @@ const App: React.FC = () => {
         <Route path="/assets/projects/cytoscape" element={<CytoscapeViewer />} />
         <Route path="/assets/projects/event-analyzer" element={<EventAnalyzer />} />
         <Route path="/assets/projects/situational-awareness" element={<SituationalAwareness />} />
-
-        {/* Prototype Graph Explorers */}
-        <Route path="/assets/prototypes/temporal-graph-explorer" element={<TemporalGraphExplorer />} />
-        <Route path="/assets/prototypes/cytoscape-graph-explorer" element={<CytoscapeGraphExplorer />} />
-        <Route path="/assets/prototypes/placeholder" element={<PlaceholderPage />} />
+        <Route path="/assets/projects/temporal-graph" element={<TemporalGraphExplorer />} />
+        <Route path="/assets/projects/cytoscape-graph" element={<CytoscapeGraphExplorer />} />
+        <Route path="/assets/projects/placeholder-page" element={<PlaceholderPage />} />
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
