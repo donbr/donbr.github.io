@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Page Components
 import HomePage from '@/pages/HomePage';
 import ProjectsPage from '@/pages/ProjectsPage';
-import NotFoundPage from '@/pages/NotFoundPage';
+//import NotFoundPage from '@/pages/NotFoundPage';
 
 // Project Components
 import GdeltRecordViewer from '@/components/projects/gdelt/GdeltRecordViewer'; // Add .jsx extension
