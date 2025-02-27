@@ -12,6 +12,10 @@ import CytoscapeViewer from '@/components/projects/cytoscape/CytoscapeViewer';
 import EventAnalyzer from '@/components/projects/event-analyzer/EventAnalyzer';
 import SituationalAwareness from '@/components/projects/situational-awareness/SituationalAwareness';
 
+// Prototype Graph Explorers
+import TemporalGraphExplorer from '@/pages/TemporalGraphExplorer';
+import CytoscapeGraphExplorer from '@/pages/CytoscapeGraphExplorer';
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -24,6 +28,10 @@ const App: React.FC = () => {
         <Route path="/assets/projects/cytoscape" element={<CytoscapeViewer />} />
         <Route path="/assets/projects/event-analyzer" element={<EventAnalyzer />} />
         <Route path="/assets/projects/situational-awareness" element={<SituationalAwareness />} />
+
+        {/* Prototype Graph Explorers */}
+        <Route path="/assets/prototypes/temporal-graph-explorer" element={<TemporalGraphExplorer />} />
+        <Route path="/assets/prototypes/cytoscape-graph-explorer" element={<CytoscapeGraphExplorer />} />
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={<NotFoundPage />} />
