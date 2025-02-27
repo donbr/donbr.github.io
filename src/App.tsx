@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 // Page Components
 import HomePage from '@/pages/HomePage';
@@ -7,7 +7,7 @@ import ProjectsPage from '@/pages/ProjectsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
 // Project Components
-import GdeltRecordViewer from '@/components/projects/gdelt/GdeltRecordViewer'; // Add .jsx extension
+import GdeltRecordViewer from '@/components/projects/gdelt/GdeltRecordViewer';
 import CytoscapeViewer from '@/components/projects/cytoscape/CytoscapeViewer';
 import EventAnalyzer from '@/components/projects/event-analyzer/EventAnalyzer';
 import SituationalAwareness from '@/components/projects/situational-awareness/SituationalAwareness';
@@ -18,7 +18,7 @@ import CytoscapeGraphExplorer from '@/pages/CytoscapeGraphExplorer';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/assets/projects" element={<ProjectsPage />} />
@@ -36,7 +36,7 @@ const App: React.FC = () => {
         {/* Catch-all route for 404s */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
