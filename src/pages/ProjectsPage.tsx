@@ -111,9 +111,9 @@ const ProjectsPage: React.FC = () => {
   const projects = [
     {
       title: "GDELT GKG Viewer",
-      description: "An interactive viewer for the GDELT Global Knowledge Graph. Built as a single-page prototype application using React, Tailwind CSS, and Leaflet for map visualizations, it offers a searchable record list, tone analysis, version toggling, and an intuitive user interface for exploring multidimensional data.",
+      description: "An initial design prototype for the GDELT Global Knowledge Graph. Built as a single-page prototype application using React, Tailwind CSS, and Leaflet for map visualizations, it offers a searchable record list, tone analysis, version toggling, and an intuitive user interface for exploring multidimensional data.",
       tags: ["React", "Tailwind CSS", "Leaflet", "Data Visualization"],
-      demoUrl: "/assets/projects/gdelt"
+      demoUrl: "https://graph-viz-next.vercel.app/gdelt-records-viewer"
     },
     {
       title: "GDELT ETL Pipeline",
