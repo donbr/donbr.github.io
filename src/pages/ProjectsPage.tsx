@@ -38,6 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'Machine Learning': 'bg-green-100 text-green-800',
     'NLP': 'bg-red-100 text-red-800',
     'Cytoscape.js': 'bg-blue-100 text-blue-800',
+    'D3.js': 'bg-blue-100 text-blue-800',    
     'Network Analysis': 'bg-green-100 text-green-800',
     'Bioinformatics': 'bg-purple-100 text-purple-800',
     'Neo4j': 'bg-blue-100 text-blue-800',
@@ -109,12 +110,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const ProjectsPage: React.FC = () => {
   const projects = [
     {
-      title: "Interactive 404 Experience",
-      description: "Creative error page featuring dynamic typing animations, particle effects, and interactive background elements. Demonstrates modern front-end animation techniques with React and CSS.",
-      tags: ["React", "CSS Animation", "Interactive Design", "UX"],
-      demoUrl: "/assets/projects/placeholder-page"
-    },
-    {
       title: "GDELT GKG Viewer",
       description: "An interactive viewer for the GDELT Global Knowledge Graph. Built as a single-page prototype application using React, Tailwind CSS, and Leaflet for map visualizations, it offers a searchable record list, tone analysis, version toggling, and an intuitive user interface for exploring multidimensional data.",
       tags: ["React", "Tailwind CSS", "Leaflet", "Data Visualization"],
@@ -145,10 +140,10 @@ const ProjectsPage: React.FC = () => {
       huggingFaceUrl: "https://huggingface.co/spaces/dwb2023/parsimony"
     },
     {
-      title: "STRING Network Viewer",
-      description: "Interactive visualization of protein-protein interaction networks using Cytoscape.js. Features dynamic layouts, protein information display, and interaction details.",
-      tags: ["Cytoscape.js", "Network Analysis", "Bioinformatics"],
-      demoUrl: "/assets/projects/cytoscape"
+      title: "Graph Network Vizualizations",
+      description: "Advanced network visualization tool built with Cytoscape.js and D3.js, offering rich interactive features for complex graph data. Includes timeline animation, detailed node inspection, relationship filtering, and customizable visual styling.",
+      tags: ["Cytoscape.js", "D3.js", "React", "Network Analysis", "Interactive Visualization", "Bioinformatics"],
+      demoUrl: "https://graph-viz-next.vercel.app/"
     },
     {
       title: "EduScape: Graph-Based Curriculum Development",
@@ -169,30 +164,6 @@ const ProjectsPage: React.FC = () => {
       title: "Drug Repurposing Research",
       description: "Led development efforts in drug repurposing using industry datasets and ontologies, implementing both graph and non-graph approaches.",
       tags: ["Healthcare", "Graph Analysis", "Research"]
-    },
-    {
-      title: "Event Analysis System",
-      description: "Interactive system for analyzing social media events using pattern matching and ontology support. Features event classification, temporal analysis, and entity extraction.",
-      tags: ["JavaScript", "NLP", "Pattern Matching"],
-      demoUrl: "/assets/projects/event-analyzer"
-    },
-    {
-      title: "Situational Awareness Graph",
-      description: "Interactive network visualization for situational awareness scenarios. Visualizes relationships between disaster response, cybersecurity, and supply chain elements.",
-      tags: ["Python", "NetworkX", "Graph Analysis"],
-      demoUrl: "/assets/projects/situational-awareness"
-    },
-    {
-      title: "Temporal Graph Explorer",
-      description: "An interactive visualization tool for exploring time-based graph data. Features timeline playback controls, node filtering, and detailed property inspection for entities and relationships as they evolve over time.",
-      tags: ["React", "TypeScript", "Graph Visualization", "Temporal Analysis"],
-      demoUrl: "/assets/projects/temporal-graph"
-    },
-    {
-      title: "Cytoscape Graph Explorer",
-      description: "Advanced network visualization tool built with Cytoscape.js, offering rich interactive features for complex graph data. Includes timeline animation, detailed node inspection, relationship filtering, and customizable visual styling.",
-      tags: ["Cytoscape.js", "React", "Network Analysis", "Interactive Visualization"],
-      demoUrl: "/assets/projects/cytoscape-graph"
     }
   ];
 
