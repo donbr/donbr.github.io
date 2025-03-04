@@ -78,6 +78,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 Contact
               </a>
+              <a 
+                href="https://graph-viz-next.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="py-4 px-2 text-blue-600 hover:text-blue-800"
+              >
+                Graph Demos
+              </a>
             </div>
           </div>
         </div>
@@ -90,8 +98,36 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Don Branson. All rights reserved.</p>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; {new Date().getFullYear()} Don Branson. All rights reserved.</p>
+            <div className="flex space-x-4 mt-4 md:mt-0">
+              <a 
+                href="https://github.com/donbr" 
+                className="text-gray-300 hover:text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/donbranson/" 
+                className="text-gray-300 hover:text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a 
+                href="https://graph-viz-next.vercel.app/" 
+                className="text-gray-300 hover:text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Graph Visualizations
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

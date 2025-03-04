@@ -32,7 +32,7 @@ const HomePage: React.FC = () => {
             <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
               Versatile professional with over two decades of expertise in AI engineering, solutions architecture, and business solution implementation.
             </p>
-            <div className="flex justify-center space-x-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <a 
                 href="https://github.com/donbr" 
                 className="bg-gray-800 text-white px-6 py-2 rounded-md hover:bg-gray-700"
@@ -48,6 +48,14 @@ const HomePage: React.FC = () => {
                 rel="noopener noreferrer"
               >
                 LinkedIn
+              </a>
+              <a 
+                href="https://huggingface.co/dwb2023" 
+                className="bg-amber-300 text-amber-700 px-6 py-2 rounded-md hover:bg-amber-400"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hugging Face
               </a>
             </div>
           </div>
@@ -146,22 +154,51 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Projects Section */}
+      <section id="projects" className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Featured Projects</h2>
+          <div className="bg-gray-50 rounded-lg shadow-md p-6">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">AI & Machine Learning Projects</h3>
+            <p className="text-gray-600 mb-4">
+              My portfolio includes a range of AI applications and research projects available on my Hugging Face profile:
+            </p>
+            <ul className="text-gray-600 list-disc pl-6 mb-6 space-y-2">
+              <li>GDELT Knowledge Graph datasets and analysis tools</li>
+              <li>Network visualization tools for complex data relationships</li>
+              <li>Fine-tuned models for specialized tasks</li>
+              <li>Interactive demos showcasing RAG implementations</li>
+            </ul>
+            <div className="flex justify-center">
+              <a 
+                href="https://huggingface.co/dwb2023" 
+                className="bg-amber-300 text-amber-700 px-6 py-2 rounded-md hover:bg-amber-400"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Hugging Face Projects
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
-      <section id="contact" className="bg-white py-16">
+      <section id="contact" className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Get In Touch</h2>
-          <div className="bg-gray-50 rounded-lg shadow-md p-6 max-w-lg mx-auto">
+          <div className="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto">
             <p className="text-gray-600 text-center mb-6">
-              Interested in collaborating on AI projects or discussing solutions architecture? Let's connect on LinkedIn!
+              Interested in collaborating on AI projects or discussing solutions architecture? Connect with me on one of these platforms:
             </p>
-            <div className="flex justify-center space-x-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <a 
                 href="https://www.linkedin.com/in/donbranson/" 
                 className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-500"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Connect on LinkedIn
+                LinkedIn
               </a>
               <a 
                 href="https://github.com/donbr" 
@@ -169,7 +206,15 @@ const HomePage: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Follow on GitHub
+                GitHub
+              </a>
+              <a 
+                href="https://huggingface.co/dwb2023" 
+                className="bg-amber-300 text-amber-700 px-6 py-2 rounded-md hover:bg-yellow-500"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hugging Face
               </a>
             </div>
           </div>
