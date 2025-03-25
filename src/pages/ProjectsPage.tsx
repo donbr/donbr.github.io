@@ -60,7 +60,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'Interactive Visualization': 'bg-green-100 text-green-800',
     'CSS Animation': 'bg-pink-100 text-pink-800',
     'Interactive Design': 'bg-indigo-100 text-indigo-800',
-    'UX': 'bg-teal-100 text-teal-800'
+    'UX': 'bg-teal-100 text-teal-800',
+    'WebGPU': 'bg-purple-100 text-purple-800',
+    'ONNX': 'bg-blue-100 text-blue-800',
+    'Privacy-Preserving': 'bg-green-100 text-green-800',
+    'On-device AI': 'bg-red-100 text-red-800'
   };
 
   return (
@@ -78,9 +82,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
       <div className="mt-4 space-y-2">
         {demoUrl && (
-          <Link to={demoUrl} className="text-blue-600 hover:text-blue-800 block">
+          <a 
+            href={demoUrl}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 block"
+          >
             View Demo →
-          </Link>
+          </a>
         )}
         {codeUrl && (
           <a 
@@ -109,6 +118,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
 const ProjectsPage: React.FC = () => {
   const projects = [
+    {
+      title: "AI in Your Browser: TransformersJS ONNX Showcase",
+      description: "Experience cutting-edge AI models running directly in your browser with no server requirements. This project demonstrates multiple machine learning models (LLaMA 3.2, Phi 3.5, Janus, Florence 2) powered by TransformersJS and ONNX Runtime with WebGPU acceleration, delivering up to 100x faster performance than traditional WebAssembly approaches.",
+      tags: ["JavaScript", "React", "Machine Learning", "WebGPU", "ONNX", "HuggingFace", "Privacy-Preserving", "On-device AI", "LLMs", "Interactive Visualization"],
+      demoUrl: "https://transformersjs-examples.vercel.app",
+      codeUrl: "https://github.com/donbr/transformersjs-examples"
+    },
     {
       title: "GDELT GKG Viewer",
       description: "An initial design prototype for the GDELT Global Knowledge Graph. Built as a single-page prototype application using React, Tailwind CSS, and Leaflet for map visualizations, it offers a searchable record list, tone analysis, version toggling, and an intuitive user interface for exploring multidimensional data.",
