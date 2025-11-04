@@ -1,0 +1,49 @@
+﻿Claude Code Plan for Enhancing donbr.github.io
+This plan outlines how Claude and supporting code can implement the recommended improvements to your personal branding site. The aims are to surface your AI engineering expertise, highlight your mentorship work and automate content generation using existing project data.
+1. Data Gathering via Connectors
+1. Fetch project documentation from GitHub
+2. Use the GitHub_fetch_file endpoint to retrieve key files (e.g. README) from your repositories. For example:
+  call_tool(path="/GitHub/link_.../fetch_file", args={"repository_full_name": "aie8-cert-challenge/gdelt-knowledge-base", "path": "README.md", "ref": "HEAD"})
+3. Repeat for the advanced retrieval repository. These files contain architecture descriptions[1] and evaluation results[2] that you can summarise for project pages.
+4. Load assignment data
+5. Use pandas to read the Session 7–10 response files and the master student list. Store them as data frames for later analysis.
+2. Content Generation
+1. Summarise repository information
+2. Parse the fetched README text and extract sections like “Architecture Summary” and “Evaluation Results”. Condense them into narrative paragraphs (e.g., describe the five‑layer architecture[1] and note that the Cohere reranker scores highest[2]).
+3. Aggregate mentoring insights
+4. Compute statistics from assignment responses: number of submissions, mean scores, most common errors. Use these to write anonymised summaries demonstrating your mentoring impact.
+5. Generate diagrams
+6. Use Excalidraw to draw hand‑sketched diagrams of:
+o The five‑layer RAG architecture[1].
+o The taxonomy of retrieval strategies[3].
+o A MentorGraph schema linking students, assignments and feedback.
+7. Export these diagrams as PNG/SVG files and embed them in the Markdown pages.
+3. Site Page Creation
+1. Project pages
+2. Create a new Markdown file for each major project (e.g. gdelt.md in a projects directory). Include:
+o Introduction and problem statement.
+o Architecture overview with diagram.
+o Key results and findings.
+o Links to the code, demos and datasets.
+3. Mentorship section
+4. Create a mentorship.md page summarising your role in the AI Makerspace bootcamp. List the sessions you led (synthetic data generation[4], evaluation metrics[5], advanced retrieval[3]) and include aggregated insights from student assignments.
+5. Update navigation
+6. Modify the site’s navigation menu to link to the new project and mentorship pages and ensure visual consistency across pages.
+4. Automation Script Outline
+The following steps describe a high‑level automation pipeline that Claude can execute:
+1. Retrieve README files for each project using the GitHub connector and parse relevant sections.
+2. Load assignment data into data frames and compute summary statistics.
+3. Compose Markdown content for each project and mentorship page using the extracted text, statistics and diagrams. Use a frontmatter library to add metadata.
+4. Write the Markdown files to the appropriate directories within your GitHub Pages repository.
+5. Commit changes using the GitHub connector (e.g., through a put_file or equivalent endpoint) to update the site.
+This outline avoids embedding complex nested strings in code and focuses on the sequence of operations Claude will perform.
+5. Deployment & Review
+• Run this script manually or via a CI pipeline whenever you want to refresh the site content.
+• Review the generated pages for accuracy and aesthetics before publishing.
+• Iterate on the design and narrative based on user feedback and new data.
+By following this plan, you can ground your site improvements in the documentation and data you already have, while leveraging Claude and the provided connectors to automate the heavy lifting.
+
+[1] [2] README.md
+https://github.com/aie8-cert-challenge/gdelt-knowledge-base/blob/HEAD/README.md
+[3] [4] [5] README.md
+https://github.com/don-aie-cohort8/aie8-s09-adv-retrieval/blob/HEAD/README.md

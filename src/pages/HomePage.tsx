@@ -183,6 +183,81 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Teaching & Mentorship Section */}
+      <section id="teaching" className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Teaching & Mentorship</h2>
+
+          {/* Introduction */}
+          <div className="text-center mb-8">
+            <p className="text-xl text-gray-700 font-semibold mb-2">AI Makerspace Certified AI Engineer Bootcamp</p>
+            <p className="text-lg text-gray-600">Lead Instructor & Mentor - Cohort 8</p>
+          </div>
+
+          {/* Sessions Taught */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {/* Session 7: Synthetic Data Generation */}
+            <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="mb-4">
+                <span className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full font-semibold">
+                  Session 7
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">Synthetic Data Generation</h3>
+              <ul className="text-gray-600 space-y-2">
+                <li>• Data augmentation techniques</li>
+                <li>• Quality evaluation metrics</li>
+                <li>• Privacy-preserving approaches</li>
+                <li>• Hands-on implementation</li>
+              </ul>
+            </div>
+
+            {/* Sessions 8-9: RAG Evaluation */}
+            <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="mb-4">
+                <span className="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-semibold">
+                  Sessions 8-9
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">RAG Evaluation Metrics</h3>
+              <ul className="text-gray-600 space-y-2">
+                <li>• Retrieval accuracy assessment</li>
+                <li>• Generation quality metrics</li>
+                <li>• End-to-end evaluation</li>
+                <li>• Benchmarking strategies</li>
+              </ul>
+            </div>
+
+            {/* Session 10: Advanced Retrieval */}
+            <div className="bg-gray-50 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="mb-4">
+                <span className="inline-block bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded-full font-semibold">
+                  Session 10
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">Advanced Retrieval Strategies</h3>
+              <ul className="text-gray-600 space-y-2">
+                <li>• Vector search optimization</li>
+                <li>• Hybrid retrieval approaches</li>
+                <li>• Re-ranking with Cohere</li>
+                <li>• Contextual retrieval patterns</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Impact Statement */}
+          <div className="bg-blue-50 rounded-lg p-6 text-center">
+            <p className="text-gray-700 text-lg leading-relaxed mb-4">
+              Guided cohort through hands-on implementation of production-grade RAG systems,
+              from data generation and quality evaluation to advanced retrieval strategies and performance optimization.
+            </p>
+            <p className="text-gray-600">
+              Focus on practical, real-world applications with emphasis on understanding trade-offs and best practices for deploying AI systems at scale.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-4">

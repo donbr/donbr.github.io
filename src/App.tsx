@@ -11,6 +11,8 @@ import GdeltRecordViewer from '@/components/projects/gdelt/GdeltRecordViewer'; /
 import CytoscapeViewer from '@/components/projects/cytoscape/CytoscapeViewer';
 import EventAnalyzer from '@/components/projects/event-analyzer/EventAnalyzer';
 import SituationalAwareness from '@/components/projects/situational-awareness/SituationalAwareness';
+import GdeltKnowledgeBase from '@/components/projects/gdelt-kb/GdeltKnowledgeBase';
+import AdvancedRetrieval from '@/components/projects/advanced-retrieval/AdvancedRetrieval';
 
 const App: React.FC = () => {
   return (
@@ -24,6 +26,8 @@ const App: React.FC = () => {
         <Route path="/assets/projects/cytoscape" element={<CytoscapeViewer />} />
         <Route path="/assets/projects/event-analyzer" element={<EventAnalyzer />} />
         <Route path="/assets/projects/situational-awareness" element={<SituationalAwareness />} />
+        <Route path="/assets/projects/gdelt-knowledge-base" element={<GdeltKnowledgeBase />} />
+        <Route path="/assets/projects/advanced-retrieval" element={<AdvancedRetrieval />} />
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={<NotFoundPage />} />

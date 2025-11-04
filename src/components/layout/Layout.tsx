@@ -60,8 +60,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 Certifications
               </a>
-              <Link 
-                to="/assets/projects" 
+              <Link
+                to="/assets/projects"
                 className={cn(
                   "py-4 px-2 hover:text-gray-900",
                   isActive('/assets/projects') ? "text-gray-900 border-b-2 border-blue-500" : "text-gray-500"
@@ -69,8 +69,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 Projects
               </Link>
-              <a 
-                href="/#contact" 
+              <a
+                href="/#teaching"
+                className={cn(
+                  "py-4 px-2 hover:text-gray-900",
+                  location.hash === '#teaching' ? "text-gray-900 border-b-2 border-blue-500" : "text-gray-500"
+                )}
+              >
+                Teaching
+              </a>
+              <a
+                href="/#contact"
                 className={cn(
                   "py-4 px-2 hover:text-gray-900",
                   location.hash === '#contact' ? "text-gray-900 border-b-2 border-blue-500" : "text-gray-500"

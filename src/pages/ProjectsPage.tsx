@@ -9,15 +9,17 @@ interface ProjectCardProps {
   demoUrl?: string;
   codeUrl?: string;
   huggingFaceUrl?: string;
+  detailUrl?: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ 
-  title, 
-  description, 
-  tags, 
-  demoUrl, 
-  codeUrl, 
-  huggingFaceUrl 
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  title,
+  description,
+  tags,
+  demoUrl,
+  codeUrl,
+  huggingFaceUrl,
+  detailUrl
 }) => {
   const tagColorMap: Record<string, string> = {
     'React': 'bg-blue-100 text-blue-800',
@@ -81,10 +83,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         ))}
       </div>
       <div className="mt-4 space-y-2">
+        {detailUrl && (
+          <Link
+            to={detailUrl}
+            className="text-blue-600 hover:text-blue-800 block font-semibold"
+          >
+            Learn More →
+          </Link>
+        )}
         {demoUrl && (
-          <a 
+          <a
             href={demoUrl}
-            target="_blank" 
+            target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 block"
           >
@@ -92,20 +102,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </a>
         )}
         {codeUrl && (
-          <a 
-            href={codeUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href={codeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 block"
           >
             View Code →
           </a>
         )}
         {huggingFaceUrl && (
-          <a 
-            href={huggingFaceUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href={huggingFaceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 block"
           >
             View on Hugging Face →
@@ -129,25 +139,36 @@ const ProjectsPage: React.FC = () => {
       title: "GDELT GKG Viewer",
       description: "An initial design prototype for the GDELT Global Knowledge Graph. Built as a single-page prototype application using React, Tailwind CSS, and Leaflet for map visualizations, it offers a searchable record list, tone analysis, version toggling, and an intuitive user interface for exploring multidimensional data.",
       tags: ["React", "Tailwind CSS", "Leaflet", "Data Visualization"],
-      demoUrl: "https://graph-viz-next.vercel.app/gdelt-records-viewer"
+      demoUrl: "https://graph-viz-next.vercel.app/gdelt-records-viewer",
+      detailUrl: "/assets/projects/gdelt-knowledge-base"
     },
     {
       title: "GDELT ETL Pipeline",
       description: "Production-grade ETL pipeline built with Prefect for processing GDELT Global Knowledge Graph data. Features concurrent processing, error handling, and direct integration with Hugging Face Datasets.",
       tags: ["Prefect", "Python", "Data Pipeline"],
-      codeUrl: "https://gist.github.com/donbr/e2af2bbe441f90b8664539a25957a6c0"
+      codeUrl: "https://gist.github.com/donbr/e2af2bbe441f90b8664539a25957a6c0",
+      detailUrl: "/assets/projects/gdelt-knowledge-base"
     },
     {
       title: "GDELT Knowledge Graph Dataset",
       description: "Curated GDELT Global Knowledge Graph datasets focusing on critical time periods (March 2020 COVID-19 onset, February 2025). Features optimized data structures for knowledge graph analysis, temporal patterns, and sentiment analysis.",
       tags: ["Hugging Face", "Parquet", "Data Engineering"],
-      huggingFaceUrl: "https://huggingface.co/datasets/dwb2023/gdelt-gkg-march2020-v2"
+      huggingFaceUrl: "https://huggingface.co/datasets/dwb2023/gdelt-gkg-march2020-v2",
+      detailUrl: "/assets/projects/gdelt-knowledge-base"
     },
     {
       title: "GDELT Insight Explorer",
       description: "Interactive Streamlit application for analyzing GDELT data through knowledge graphs. Features real-time exploration of events, network analysis, and temporal visualization capabilities. Directly integrates with curated GDELT datasets on Hugging Face.",
       tags: ["Streamlit", "DuckDB", "NetworkX", "Knowledge Graphs"],
-      huggingFaceUrl: "https://huggingface.co/spaces/dwb2023/insight"
+      huggingFaceUrl: "https://huggingface.co/spaces/dwb2023/insight",
+      detailUrl: "/assets/projects/gdelt-knowledge-base"
+    },
+    {
+      title: "Advanced Retrieval Strategies for RAG",
+      description: "Comprehensive exploration of modern retrieval techniques including vector search, hybrid approaches, and re-ranking strategies. Developed and taught as part of AI Makerspace bootcamp curriculum, covering dense retrieval, sparse retrieval, hybrid methods, and the Cohere reranker with hands-on implementation examples.",
+      tags: ["Python", "RAG", "Vector Search", "Cohere", "LangChain", "Education Tech", "Machine Learning"],
+      codeUrl: "https://github.com/don-aie-cohort8/aie8-s09-adv-retrieval",
+      detailUrl: "/assets/projects/advanced-retrieval"
     },
     {
       title: "Parsimony",
