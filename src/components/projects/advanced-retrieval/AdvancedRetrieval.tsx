@@ -49,6 +49,44 @@ const AdvancedRetrieval: React.FC = () => {
             </p>
           </div>
 
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-lg p-6 mt-8">
+            <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+              <span className="mr-2">🔗</span>
+              Project Relationship
+            </h3>
+            <p className="text-gray-700 mb-3">
+              <strong>Educational Foundation → Production Implementation</strong>
+            </p>
+            <p className="text-gray-600 mb-2">
+              This coursework served as the educational foundation for the{' '}
+              <a href="/assets/projects/gdelt-knowledge-base" className="text-blue-600 hover:text-blue-800 font-semibold underline">
+                GDELT Knowledge Base
+              </a>{' '}
+              certification project. The strategies, evaluation techniques, and architectural patterns learned here
+              were refined and applied to build a production-grade RAG system.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 mt-4">
+              <div className="bg-white rounded p-4">
+                <p className="font-medium text-gray-800 mb-2">This Learning Project (7 strategies)</p>
+                <ul className="text-gray-600 text-sm space-y-1">
+                  <li>• Educational/exploratory context</li>
+                  <li>• Sessions 07-09 coursework</li>
+                  <li>• Architecture patterns comparison</li>
+                  <li>• LangGraph vs LCEL approaches</li>
+                </ul>
+              </div>
+              <div className="bg-white rounded p-4">
+                <p className="font-medium text-gray-800 mb-2">GDELT KB Production (4 strategies)</p>
+                <ul className="text-gray-600 text-sm space-y-1">
+                  <li>• Production-grade certification project</li>
+                  <li>• 5-layer architecture implementation</li>
+                  <li>• Published HuggingFace datasets</li>
+                  <li>• Provenance & manifest system</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6 mt-8">
             <div className="bg-blue-50 rounded-lg p-6">
               <div className="text-3xl font-bold text-blue-600 mb-2">4 hours</div>

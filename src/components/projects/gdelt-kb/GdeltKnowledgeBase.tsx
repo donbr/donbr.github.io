@@ -198,8 +198,69 @@ const GdeltKnowledgeBase: React.FC = () => {
         </div>
       </section>
 
-      {/* Evaluation Results Section */}
+      {/* Provenance & Manifest System Section */}
       <section className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Provenance & Manifest System</h2>
+          <p className="text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            Every major stage in this project is signed by machine-readable manifests to ensure traceability,
+            data integrity, and AI assistant accountability.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">SHA-256 Fingerprinting</h3>
+              <p className="text-gray-600 mb-4">
+                All datasets and evaluation runs are cryptographically signed with SHA-256 hashes, providing
+                immutable proof of data integrity and enabling precise version tracking.
+              </p>
+              <div className="bg-gray-50 rounded p-4 font-mono text-sm text-gray-700">
+                <div className="mb-2"><span className="text-gray-500">Dataset:</span> sha256:a3f2...</div>
+                <div className="mb-2"><span className="text-gray-500">Evaluation:</span> sha256:b7c4...</div>
+                <div><span className="text-gray-500">Manifest:</span> sha256:d9e1...</div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Audit Trail Features</h3>
+              <ul className="text-gray-600 space-y-3">
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span><strong>Full Reproducibility:</strong> Every evaluation can be replayed with identical inputs</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span><strong>Version Tracking:</strong> Manifest files track all dependency versions</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span><strong>Data Lineage:</strong> Complete record from ingestion to evaluation</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span><strong>Accountability:</strong> AI-generated outputs are traceable to specific runs</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 rounded-lg p-6">
+            <h4 className="font-semibold text-gray-800 mb-3">Why This Matters</h4>
+            <p className="text-gray-600 mb-3">
+              In production RAG systems, understanding exactly what data was used, which model versions generated
+              responses, and being able to reproduce results is critical for debugging, compliance, and continuous
+              improvement.
+            </p>
+            <p className="text-gray-600">
+              The manifest system provides a blueprint for building trustworthy AI systems where every decision
+              can be audited and every result can be verified.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Evaluation Results Section */}
+      <section className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Retrieval Evaluation Results</h2>
           <p className="text-gray-600 text-center mb-8 max-w-3xl mx-auto">
@@ -277,6 +338,105 @@ const GdeltKnowledgeBase: React.FC = () => {
         </div>
       </section>
 
+      {/* Research Contributions Section */}
+      <section className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Research Contributions</h2>
+          <p className="text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+            This project provides a test set generation and evaluation suite for GDELT-focused RAG systems,
+            enabling reproducible benchmarking of retrieval strategies with complete evaluation transparency.
+          </p>
+
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8 mb-8">
+            <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Published HuggingFace Datasets</h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <h4 className="font-semibold text-gray-800 mb-3">Source & Test Data</h4>
+                <ul className="text-gray-600 space-y-2 text-sm">
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2 font-mono">→</span>
+                    <div>
+                      <strong>dwb2023/gdelt-rag-sources-v2</strong><br />
+                      <span className="text-gray-500">38 GDELT documentation pages</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2 font-mono">→</span>
+                    <div>
+                      <strong>dwb2023/gdelt-rag-golden-testset-v2</strong><br />
+                      <span className="text-gray-500">12 QA pairs for evaluation</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <h4 className="font-semibold text-gray-800 mb-3">Evaluation Results</h4>
+                <ul className="text-gray-600 space-y-2 text-sm">
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2 font-mono">→</span>
+                    <div>
+                      <strong>dwb2023/gdelt-rag-evaluation-inputs</strong><br />
+                      <span className="text-gray-500">60 evaluation records (4 retrievers × 12 tests)</span>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2 font-mono">→</span>
+                    <div>
+                      <strong>dwb2023/gdelt-rag-evaluation-metrics</strong><br />
+                      <span className="text-gray-500">Complete RAGAS scores with metadata</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
+              <div className="text-gray-600 font-medium mb-2">Published Datasets</div>
+              <p className="text-gray-500 text-sm">Complete reproducibility for research</p>
+            </div>
+            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+              <div className="text-3xl font-bold text-green-600 mb-2">60</div>
+              <div className="text-gray-600 font-medium mb-2">Evaluation Records</div>
+              <p className="text-gray-500 text-sm">Comprehensive strategy comparison</p>
+            </div>
+            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+              <div className="text-3xl font-bold text-purple-600 mb-2">100%</div>
+              <div className="text-gray-600 font-medium mb-2">Transparency</div>
+              <p className="text-gray-500 text-sm">All inputs and outputs public</p>
+            </div>
+          </div>
+
+          <div className="bg-green-50 rounded-lg p-6">
+            <h4 className="font-semibold text-gray-800 mb-3">Impact for the Research Community</h4>
+            <div className="grid md:grid-cols-2 gap-6 text-gray-600">
+              <ul className="space-y-2">
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span><strong>Benchmarking:</strong> Standard evaluation suite for GDELT RAG systems</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span><strong>Reproducibility:</strong> Complete datasets enable verification of results</span>
+                </li>
+              </ul>
+              <ul className="space-y-2">
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span><strong>Comparability:</strong> Standardized metrics for strategy comparison</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span><strong>Accessibility:</strong> Free, public datasets on HuggingFace Hub</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Technical Implementation Section */}
       <section className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-4">
@@ -331,15 +491,19 @@ const GdeltKnowledgeBase: React.FC = () => {
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-600 mr-2">✓</span>
+                  <span>SHA-256 provenance tracking for audit trails</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
+                  <span>Manifest-based reproducible evaluation harness</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2">✓</span>
                   <span>Metadata filtering for temporal and geographic queries</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-600 mr-2">✓</span>
                   <span>Response streaming for improved UX</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-600 mr-2">✓</span>
-                  <span>Comprehensive evaluation framework</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-600 mr-2">✓</span>
@@ -369,6 +533,31 @@ const GdeltKnowledgeBase: React.FC = () => {
               The dataset focuses on the critical March 2020 period capturing global COVID-19 pandemic onset,
               providing rich context for analyzing worldwide event patterns, sentiment shifts, and information flows
               during a pivotal moment in modern history.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md p-6 mt-8">
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">Operational Metrics</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 text-center">
+                <div className="text-gray-600 font-medium mb-2">Evaluation Cost</div>
+                <div className="text-3xl font-bold text-blue-600 mb-1">$5-6</div>
+                <div className="text-gray-500 text-sm">per complete run</div>
+              </div>
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 text-center">
+                <div className="text-gray-600 font-medium mb-2">Execution Time</div>
+                <div className="text-3xl font-bold text-green-600 mb-1">20-30</div>
+                <div className="text-gray-500 text-sm">minutes per run</div>
+              </div>
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 text-center">
+                <div className="text-gray-600 font-medium mb-2">Evaluation Scale</div>
+                <div className="text-3xl font-bold text-purple-600 mb-1">48</div>
+                <div className="text-gray-500 text-sm">total evaluations (4×12)</div>
+              </div>
+            </div>
+            <p className="text-gray-600 text-sm mt-6 text-center">
+              <strong>Note:</strong> Each run processes 12 test questions across 4 retrieval strategies,
+              generating comprehensive RAGAS metrics for faithfulness, answer relevancy, context precision, and context recall.
             </p>
           </div>
         </div>

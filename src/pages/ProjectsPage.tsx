@@ -66,7 +66,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'WebGPU': 'bg-purple-100 text-purple-800',
     'ONNX': 'bg-blue-100 text-blue-800',
     'Privacy-Preserving': 'bg-green-100 text-green-800',
-    'On-device AI': 'bg-red-100 text-red-800'
+    'On-device AI': 'bg-red-100 text-red-800',
+    'RAG': 'bg-blue-100 text-blue-800',
+    'Cohere': 'bg-purple-100 text-purple-800',
+    'Evaluation Metrics': 'bg-yellow-100 text-yellow-800',
+    'Performance Benchmarking': 'bg-green-100 text-green-800'
   };
 
   return (
@@ -136,9 +140,9 @@ const ProjectsPage: React.FC = () => {
       codeUrl: "https://github.com/donbr/transformersjs-examples"
     },
     {
-      title: "GDELT GKG Viewer",
-      description: "An initial design prototype for the GDELT Global Knowledge Graph. Built as a single-page prototype application using React, Tailwind CSS, and Leaflet for map visualizations, it offers a searchable record list, tone analysis, version toggling, and an intuitive user interface for exploring multidimensional data.",
-      tags: ["React", "Tailwind CSS", "Leaflet", "Data Visualization"],
+      title: "GDELT Knowledge Base",
+      description: "Production-grade RAG system for analyzing global events using GDELT documentation. Features a 5-layer architecture with comparative evaluation showing Cohere Rerank achieving 95.1% accuracy. Published 4 datasets to HuggingFace Hub providing the first publicly available evaluation suite for GDELT-focused RAG systems, with SHA-256 provenance tracking ensuring reproducibility.",
+      tags: ["React", "Tailwind CSS", "Leaflet", "Data Visualization", "RAG", "Vector Search", "Python", "LangChain", "Evaluation Metrics", "Research"],
       demoUrl: "https://graph-viz-next.vercel.app/gdelt-records-viewer",
       detailUrl: "/assets/projects/gdelt-knowledge-base"
     },
@@ -165,8 +169,8 @@ const ProjectsPage: React.FC = () => {
     },
     {
       title: "Advanced Retrieval Strategies for RAG",
-      description: "Comprehensive exploration of modern retrieval techniques including vector search, hybrid approaches, and re-ranking strategies. Developed and taught as part of AI Makerspace bootcamp curriculum, covering dense retrieval, sparse retrieval, hybrid methods, and the Cohere reranker with hands-on implementation examples.",
-      tags: ["Python", "RAG", "Vector Search", "Cohere", "LangChain", "Education Tech", "Machine Learning"],
+      description: "Comprehensive exploration of modern retrieval techniques including vector search, hybrid approaches, and re-ranking strategies. Educational foundation that informed the production-grade GDELT Knowledge Base certification project. Developed and taught as part of AI Makerspace bootcamp curriculum with hands-on implementation examples comparing 6 retrieval strategies.",
+      tags: ["Python", "RAG", "Vector Search", "Cohere", "LangChain", "Education Tech", "Machine Learning", "Performance Benchmarking"],
       codeUrl: "https://github.com/don-aie-cohort8/aie8-s09-adv-retrieval",
       detailUrl: "/assets/projects/advanced-retrieval"
     },
