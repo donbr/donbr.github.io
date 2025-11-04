@@ -191,7 +191,7 @@ const HomePage: React.FC = () => {
           {/* Introduction */}
           <div className="text-center mb-8">
             <p className="text-xl text-gray-700 font-semibold mb-2">AI Makerspace Certified AI Engineer Bootcamp</p>
-            <p className="text-lg text-gray-600">Lead Instructor & Mentor - Cohort 8</p>
+            <p className="text-lg text-gray-600">Peer Supporter & Mentor - Cohort 8</p>
           </div>
 
           {/* Sessions Taught */}

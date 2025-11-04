@@ -34,7 +34,7 @@ Implement content enhancements to showcase AI engineering expertise and mentorsh
 
     {/* Introduction */}
     <div className="mb-8">
-      <p>AI Makerspace Certified AI Engineer Bootcamp - Lead Instructor & Mentor</p>
+      <p>AI Makerspace Certified AI Engineer Bootcamp - Peer Supporter & Mentor</p>
     </div>
 
     {/* Sessions Taught */}
@@ -583,7 +583,7 @@ Retrieval Strategies
 {
   "overview": {
     "program": "AI Makerspace Certified AI Engineer Bootcamp",
-    "role": "Lead Instructor & Mentor",
+    "role": "Peer Supporter & Mentor",
     "cohort": "Cohort 8",
     "period": "2024",
     "totalSessions": 4,
