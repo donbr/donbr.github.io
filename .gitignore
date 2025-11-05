@@ -26,3 +26,5 @@ dist/index.html
 
 # MCP configuration (personal settings)
 .mcp.json
+
+.playwright-mcp/

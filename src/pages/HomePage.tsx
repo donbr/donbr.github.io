@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
             <h1 className="text-4xl font-bold text-gray-800 mb-4">Don Branson</h1>
             <p className="text-xl text-gray-600 mb-4">AI Engineer | Production Systems Architect | Mentor to 100+ AI Engineers</p>
             <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto italic">
-              "I build production-grade AI systems and teach others to do the same—with a 95%+ student retention rate across 3 bootcamp cohorts."
+              "I build production-grade AI systems and teach others to do the same—with a 90%+ student retention rate across 3 bootcamp cohorts."
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <a
@@ -65,7 +65,7 @@ const HomePage: React.FC = () => {
                 <div className="text-sm text-gray-600">Students Mentored</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-green-600">95%+</div>
+                <div className="text-2xl font-bold text-green-600">90%+</div>
                 <div className="text-sm text-gray-600">Retention Rate</div>
               </div>
               <div>
