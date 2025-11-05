@@ -73,8 +73,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'Performance Benchmarking': 'bg-green-100 text-green-800'
   };
 
-  return (
-    <div className="bg-white rounded-lg shadow-md p-6 project-card">
+  const cardContent = (
+    <>
       <h2 className="text-xl font-semibold text-gray-800 mb-4">{title}</h2>
       <p className="text-gray-600 mb-4">
         {description}
@@ -90,9 +90,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {detailUrl && (
           <Link
             to={detailUrl}
-            className="text-blue-600 hover:text-blue-800 block font-semibold"
+            className="text-blue-600 hover:text-blue-800 block font-semibold inline-flex items-center gap-1"
+            onClick={(e) => e.stopPropagation()}
           >
-            Learn More →
+            View Details <span className="text-sm">→</span>
           </Link>
         )}
         {demoUrl && (
@@ -100,9 +101,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 block"
+            className="text-green-600 hover:text-green-800 block inline-flex items-center gap-1"
+            onClick={(e) => e.stopPropagation()}
           >
-            View Demo →
+            Demo <span className="text-sm">↗</span>
           </a>
         )}
         {codeUrl && (
@@ -110,9 +112,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={codeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 block"
+            className="text-gray-600 hover:text-gray-800 block inline-flex items-center gap-1"
+            onClick={(e) => e.stopPropagation()}
           >
-            View Code →
+            Code <span className="text-sm">↗</span>
           </a>
         )}
         {huggingFaceUrl && (
@@ -120,12 +123,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={huggingFaceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 block"
+            className="text-orange-600 hover:text-orange-800 block inline-flex items-center gap-1"
+            onClick={(e) => e.stopPropagation()}
           >
-            View on Hugging Face →
+            Hugging Face <span className="text-sm">↗</span>
           </a>
         )}
       </div>
+    </>
+  );
+
+  // Make card clickable if there's a detail page
+  if (detailUrl) {
+    return (
+      <Link to={detailUrl} className="block">
+        <div className="bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow cursor-pointer">
+          {cardContent}
+        </div>
+      </Link>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 project-card">
+      {cardContent}
     </div>
   );
 };
@@ -184,7 +205,26 @@ const ProjectsPage: React.FC = () => {
       title: "Graph Network Vizualizations",
       description: "Advanced network visualization tool built with Cytoscape.js and D3.js, offering rich interactive features for complex graph data. Includes timeline animation, detailed node inspection, relationship filtering, and customizable visual styling.",
       tags: ["Cytoscape.js", "D3.js", "React", "Network Analysis", "Interactive Visualization", "Bioinformatics"],
-      demoUrl: "https://graph-viz-next.vercel.app/"
+      demoUrl: "https://graph-viz-next.vercel.app/",
+      detailUrl: "/assets/projects/cytoscape"
+    },
+    {
+      title: "GDELT Record Viewer",
+      description: "Interactive visualization tool for exploring individual GDELT event records with geographic mapping. Features real-time filtering, event clustering, and temporal analysis of global news data.",
+      tags: ["React", "Leaflet", "Data Visualization", "Temporal Analysis"],
+      detailUrl: "/assets/projects/gdelt"
+    },
+    {
+      title: "Event Analyzer",
+      description: "Sophisticated event analysis system for processing and understanding complex temporal event sequences. Includes pattern detection, correlation analysis, and predictive modeling capabilities.",
+      tags: ["TypeScript", "Data Visualization", "Pattern Matching", "Temporal Analysis"],
+      detailUrl: "/assets/projects/event-analyzer"
+    },
+    {
+      title: "Situational Awareness Dashboard",
+      description: "Real-time situational awareness visualization using advanced graph algorithms. Displays interconnected events, entities, and relationships for comprehensive understanding of complex scenarios.",
+      tags: ["React", "Graph Visualization", "Real-time Analytics", "Interactive Design"],
+      detailUrl: "/assets/projects/situational-awareness"
     },
     {
       title: "EduScape: Graph-Based Curriculum Development",
@@ -223,6 +263,7 @@ const ProjectsPage: React.FC = () => {
                 demoUrl={project.demoUrl}
                 codeUrl={project.codeUrl}
                 huggingFaceUrl={project.huggingFaceUrl}
+                detailUrl={project.detailUrl}
               />
             ))}
           </div>
