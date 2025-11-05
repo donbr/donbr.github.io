@@ -88,7 +88,7 @@ const HomePage: React.FC = () => {
           <div className="bg-white rounded-lg shadow-md p-8">
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
               I've spent <span className="font-semibold">20+ years</span> architecting solutions across travel, healthcare, telecom, and public sector—but my proudest work?
-              Teaching 100+ engineers to build production AI systems with a <span className="font-semibold text-green-600">&lt;5% dropout rate</span>.
+              Teaching 100+ engineers to build production AI systems with a <span className="font-semibold text-green-600">&lt;10% dropout rate</span>.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
               Why does that matter? Because <span className="font-semibold">AI engineering isn't just about knowing the tech—it's about knowing when to use it,
@@ -281,7 +281,7 @@ const HomePage: React.FC = () => {
               <p className="text-lg text-gray-600 mb-4">Certified AI Engineer Bootcamp | Cohorts 6, 7, 8 (2024-2025)</p>
               <div className="inline-block bg-green-100 border-2 border-green-500 rounded-lg px-6 py-3">
                 <p className="text-green-800 font-bold text-xl">
-                  Consistently Lowest Dropout Rate: &lt;5% (vs. 20-30% average)
+                  Consistently Lowest Dropout Rate: &lt;10% (vs. 20-30% average)
                 </p>
               </div>
             </div>
