@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Page Components
 import HomePage from '@/pages/HomePage';
 import ProjectsPage from '@/pages/ProjectsPage';
+import ConceptsPage from '@/pages/ConceptsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
 // Project Components
@@ -20,6 +21,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/assets/projects" element={<ProjectsPage />} />
+        <Route path="/concepts" element={<ConceptsPage />} />
 
         {/* Project routes */}
         <Route path="/assets/projects/gdelt" element={<GdeltRecordViewer />} />

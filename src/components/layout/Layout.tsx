@@ -69,6 +69,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 Projects
               </Link>
+              <Link
+                to="/concepts"
+                className={cn(
+                  "py-4 px-2 hover:text-gray-900",
+                  isActive('/concepts') ? "text-gray-900 border-b-2 border-blue-500" : "text-gray-500"
+                )}
+              >
+                Concepts
+              </Link>
               <a
                 href="/#teaching"
                 className={cn(

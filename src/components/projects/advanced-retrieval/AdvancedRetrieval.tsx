@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@/components/layout/Layout';
-import { ExternalLink, Github, BookOpen } from 'lucide-react';
+import { Github, BookOpen } from 'lucide-react';
 
 const AdvancedRetrieval: React.FC = () => {
   return (
