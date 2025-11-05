@@ -223,6 +223,7 @@ const ProjectsPage: React.FC = () => {
                 demoUrl={project.demoUrl}
                 codeUrl={project.codeUrl}
                 huggingFaceUrl={project.huggingFaceUrl}
+                detailUrl={project.detailUrl}
               />
             ))}
           </div>
