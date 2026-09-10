@@ -96,7 +96,7 @@ class EventAnalyzer {
      * @param {string} tweetText - The text to analyze.
      * @returns {Object} event - An object containing event details.
      */
-    async analyzeTweet(tweetText) {
+    async analyzeText(tweetText) {
         const event = {
             text: tweetText,
             type: this.classifyEventType(tweetText),

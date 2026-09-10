@@ -10,26 +10,26 @@ function EventAnalyzer() {
     lodashScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js';
     lodashScript.async = true;
     document.head.appendChild(lodashScript);
-    
+  
     lodashScript.onload = () => {
-      // Load the event analyzer script after Lodash is loaded
-      const analyzerScript = document.createElement('script');
-      analyzerScript.src = '/js/event-analyzer.js';
-      analyzerScript.async = true;
-      document.body.appendChild(analyzerScript);
-      
-      // Wait for script to load before initializing
-      analyzerScript.onload = initializeAnalyzer;
-    };
-    
-    function initializeAnalyzer() {
-      // If the script has defined an EventAnalyzer class
-      if (window.EventAnalyzer) {
-        const analyzer = new window.EventAnalyzer();
-        analyzeText(analyzer, input);
+      // Check if the script has already been loaded
+      if (!document.querySelector('script[src="/js/event-analyzer.js"]')) {
+        // Load the event analyzer script after Lodash is loaded
+        const analyzerScript = document.createElement('script');
+        analyzerScript.src = '/js/event-analyzer.js';
+        analyzerScript.async = true;
+        document.body.appendChild(analyzerScript);
+  
+        // Wait for script to load before initializing
+        analyzerScript.onload = () => { // initializeAnalyzer called here
+          if (window.EventAnalyzer) {
+            const analyzer = new window.EventAnalyzer();
+            analyzeText(analyzer, input);
+          }
+        };
       }
-    }
-    
+    };
+  
     // Clean up
     return () => {
       document.head.removeChild(lodashScript);
@@ -39,8 +39,9 @@ function EventAnalyzer() {
         document.body.removeChild(analyzerScript);
       }
     };
-  }, []);
-  
+  },[]);
+
+
   const analyzeText = async (analyzer, text) => {
     try {
       const analysis = await analyzer.analyzeTweet(text);
