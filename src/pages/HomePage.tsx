@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
               Generative AI Architect / AI Engineer
             </p>
             <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto italic">
-              "I architect durable multi-agent orchestration, FastMCP toolchains, and computational biology platforms—and mentor engineers to build production-grade AI systems."
+              "I architect durable multi-agent systems, composable MCP gateway architectures, and production AI platforms—and mentor engineers to build them."
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <a
@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
               I've spent <span className="font-semibold">20+ years</span> architecting enterprise-scale distributed systems and data solutions across life sciences, automotive, telecommunications, travel, and the public sector. Today, I specialize as a <span className="font-semibold text-blue-700">Generative AI Architect and Systems Engineer</span>—bridging high-velocity frontier AI capabilities with the durable execution, regulatory rigor, and data hygiene demanded by production enterprises.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
-              I serve as platform architect and maintainer of <a href="https://github.com/open-biosciences" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">Open Biosciences</a>—an open-source AI research substrate adopted by a non-profit Computational Biology Working Group to ground peer-reviewed publications. The platform comprises 13+ repositories under strict agent-ownership boundaries, 12 FastMCP servers exposing 34+ life-sciences tools, a Neo4j/Graphiti knowledge-graph layer, LangGraph supervisor orchestration with PydanticAI specialists, and Temporal.io durable state machines.
+              I serve as platform architect and maintainer of <a href="https://github.com/open-biosciences" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">Open Biosciences</a>—an open-source AI research substrate adopted by a non-profit Computational Biology Working Group to ground oncology research and publication workflows. The platform comprises 13+ repositories under strict agent-ownership boundaries, 12 FastMCP servers exposing 34+ life-sciences tools, a Neo4j/Graphiti knowledge-graph layer, LangGraph supervisor orchestration with PydanticAI specialists, and Temporal.io durable state machines.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
               Alongside architectural delivery, I have served as Grading Manager for AI Makerspace's AI Engineering Bootcamp v1.0 and peer supporter across five cohorts, training <span className="font-semibold text-green-700">150+ engineers</span> through weekly breakout groups, cohort-wide office hours, and assignment grading.
@@ -130,10 +130,10 @@ const HomePage: React.FC = () => {
               <h3 className="text-xl font-semibold text-gray-800 mb-4">Durable Agent Orchestration</h3>
               <ul className="text-gray-600 space-y-2">
                 <li>• <span className="font-semibold">Temporal.io</span> Durable Workflows</li>
-                <li>• Model Context Protocol (FastMCP)</li>
+                <li>• Composable FastMCP Gateways &amp; Server Composition</li>
+                <li>• Unified Tool Discovery &amp; Schema-Validated Contracts</li>
                 <li>• LangGraph (Supervisor Pattern)</li>
                 <li>• PydanticAI Specialized Agents</li>
-                <li>• Resilient Event-Driven Streaming</li>
               </ul>
             </div>
 
@@ -293,14 +293,15 @@ const HomePage: React.FC = () => {
             <div className="bg-gray-50 rounded-lg shadow-md p-6 border-t-4 border-blue-600 flex flex-col justify-between">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider px-2 py-1 bg-blue-100 text-blue-800 rounded">
-                  Open-Source Platform Architect
+                  Composable Gateway &bull; Platform Architecture
                 </span>
-                <h3 className="text-xl font-bold text-gray-800 mt-3 mb-2">Open Biosciences Platform & FastMCP</h3>
+                <h3 className="text-xl font-bold text-gray-800 mt-3 mb-2">Open Biosciences: Composable MCP Gateway &amp; Life-Sciences Platform</h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  13+ repositories under explicit agent-ownership boundaries, 12 production FastMCP servers exposing 34+ life-sciences tools (ChEMBL, Open Targets, UniProt, HGNC), Neo4j/Graphiti KG, and Temporal.io durable state machines. Grounding substrate for peer-reviewed computational oncology publications.
+                  A composable gateway unifying 12 domain-focused FastMCP servers and 34+ MCP tools across authoritative life-sciences sources—including ChEMBL, Open Targets, UniProt, and Ensembl—behind a unified interface. Provides modular server composition, consolidated tool discovery and invocation, schema-validated contracts, and strict identifier-resolution guardrails for reliable biomedical agent workflows.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="text-xs px-2 py-1 bg-gray-200 rounded font-medium">FastMCP</span>
+                  <span className="text-xs px-2 py-1 bg-gray-200 rounded font-medium">Composable Gateway</span>
+                  <span className="text-xs px-2 py-1 bg-gray-200 rounded font-medium">FastMCP Servers</span>
                   <span className="text-xs px-2 py-1 bg-gray-200 rounded font-medium">Temporal.io</span>
                   <span className="text-xs px-2 py-1 bg-gray-200 rounded font-medium">LangGraph</span>
                   <span className="text-xs px-2 py-1 bg-gray-200 rounded font-medium">Bioinformatics</span>

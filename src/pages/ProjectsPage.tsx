@@ -26,7 +26,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'Next.js': 'bg-slate-100 text-slate-800',
     'Tailwind CSS': 'bg-green-100 text-green-800',
     'Leaflet': 'bg-purple-100 text-purple-800',
-    'Data Visualization': 'bg-yellow-100 text-yellow-800',
+    'Composable Gateway': 'bg-emerald-100 text-emerald-800',
+    'FastMCP Servers': 'bg-teal-100 text-teal-800',
     'FastMCP': 'bg-emerald-100 text-emerald-800',
     'Model Context Protocol': 'bg-teal-100 text-teal-800',
     'Temporal.io': 'bg-indigo-100 text-indigo-800',
@@ -139,9 +140,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 const ProjectsPage: React.FC = () => {
   const projects = [
     {
-      title: "Open Biosciences AI Research Platform",
-      description: "Platform architect and maintainer of an open-source, MIT-licensed AI research platform adopted by a non-profit Computational Biology Working Group to ground peer-reviewed publications. Comprises 13+ repositories under explicit agent-ownership boundaries, Temporal.io durable state machines, LangGraph supervisor and PydanticAI specialist orchestration.",
-      tags: ["Architecture", "Temporal.io", "LangGraph", "Bioinformatics", "Open Source", "AI Agents"],
+      title: "Open Biosciences: Composable MCP Gateway & Life-Sciences Platform",
+      description: "A composable gateway unifying 12 domain-focused FastMCP servers and 34+ MCP tools across authoritative life-sciences sources—including ChEMBL, Open Targets, UniProt, and Ensembl—behind a unified interface. Provides modular server composition, consolidated tool discovery and invocation, schema-validated contracts, and strict identifier-resolution guardrails for reliable biomedical agent workflows.",
+      tags: ["Composable Gateway", "FastMCP Servers", "Temporal.io", "LangGraph", "Bioinformatics"],
       codeUrl: "https://github.com/open-biosciences/biosciences-program",
       demoUrl: "https://github.com/open-biosciences"
     },
