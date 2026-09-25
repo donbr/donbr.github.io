@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
               Generative AI Architect / AI Engineer
             </p>
             <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto italic">
-              "I architect durable multi-agent orchestration, FastMCP toolchains, and computational biology platforms—and mentor engineers across AI Makerspace bootcamp cohorts to build production-grade AI systems."
+              "I architect durable multi-agent orchestration, FastMCP toolchains, and computational biology platforms—and mentor engineers to build production-grade AI systems."
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <a
