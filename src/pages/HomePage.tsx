@@ -30,10 +30,10 @@ const HomePage: React.FC = () => {
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-3">Don Branson</h1>
             <p className="text-xl text-blue-700 font-semibold mb-4">
-              Principal AI Systems Architect & Enterprise Forward Deployed Engineer (FDE)
+              Generative AI Architect / AI Engineer
             </p>
             <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto italic">
-              "I architect durable multi-agent orchestration, FastMCP toolchains, and computational biology platforms—and mentor engineers across 7 bootcamp and on-ramp cohorts, achieving a verified &lt;10% dropout rate in Cohorts 6&ndash;8."
+              "I architect durable multi-agent orchestration, FastMCP toolchains, and computational biology platforms—and mentor engineers across AI Makerspace bootcamp cohorts to build production-grade AI systems."
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <a
@@ -77,11 +77,11 @@ const HomePage: React.FC = () => {
               </div>
               <div>
                 <div className="text-2xl font-bold text-purple-600">3 Publications</div>
-                <div className="text-sm text-gray-600">Oncology & Drug Screening</div>
+                <div className="text-sm text-gray-600">1 Under Review &bull; 2 Preprints</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-green-600">100+ Engineers</div>
-                <div className="text-sm text-gray-600">7 Cohorts (&lt;10% Dropout in C6&ndash;8)</div>
+                <div className="text-2xl font-bold text-green-600">150+ Engineers</div>
+                <div className="text-sm text-gray-600">5 Bootcamp Cohorts Supported</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-orange-600">20+ Years</div>
@@ -98,13 +98,13 @@ const HomePage: React.FC = () => {
           <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Architectural Leadership & Journey</h2>
           <div className="bg-white rounded-lg shadow-md p-8">
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
-              I've spent <span className="font-semibold">20+ years</span> architecting enterprise-scale distributed systems and data solutions across life sciences, automotive, telecommunications, travel, and the public sector. Today, I specialize as a <span className="font-semibold text-blue-700">Principal AI Systems Architect and Enterprise Forward Deployed Engineer (FDE)</span>—bridging high-velocity frontier AI capabilities with the durable execution, regulatory rigor, and data hygiene demanded by production enterprises.
+              I've spent <span className="font-semibold">20+ years</span> architecting enterprise-scale distributed systems and data solutions across life sciences, automotive, telecommunications, travel, and the public sector. Today, I specialize as a <span className="font-semibold text-blue-700">Generative AI Architect and Systems Engineer</span>—bridging high-velocity frontier AI capabilities with the durable execution, regulatory rigor, and data hygiene demanded by production enterprises.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
               I serve as platform architect and maintainer of <a href="https://github.com/open-biosciences" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">Open Biosciences</a>—an open-source AI research substrate adopted by a non-profit Computational Biology Working Group to ground peer-reviewed publications. The platform comprises 13+ repositories under strict agent-ownership boundaries, 12 FastMCP servers exposing 34+ life-sciences tools, a Neo4j/Graphiti knowledge-graph layer, LangGraph supervisor orchestration with PydanticAI specialists, and Temporal.io durable state machines.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
-              Alongside architectural delivery, I have served as lead mentor across <span className="font-semibold text-green-700">5 Certified AI Engineer bootcamp cohorts (Cohorts 6, 7, 8, 9, and v1.0) and 2 AI Engineering On-Ramp cohorts</span> at AI Makerspace, training 100+ engineers and achieving a verified <span className="font-semibold text-green-700">&lt;10% dropout rate in Cohorts 6&ndash;8</span> (vs. 20-30% industry average).
+              Alongside architectural delivery, I have served as Grading Manager for AI Makerspace's AI Engineering Bootcamp v1.0 and peer supporter across five cohorts, training <span className="font-semibold text-green-700">150+ engineers</span> through weekly breakout groups, cohort-wide office hours, and assignment grading.
             </p>
 
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
@@ -113,7 +113,7 @@ const HomePage: React.FC = () => {
                 <li>• <span className="font-semibold">Durable Orchestration:</span> Resilient workflows must survive process restarts and transient failures via deterministic state machines (Temporal.io).</li>
                 <li>• <span className="font-semibold">Fuzzy-to-Fact Safety Guardrails:</span> Enforce strict CURIE/ontology resolution (ADR-001) after natural-language discovery to eliminate hallucinations in regulated domains.</li>
                 <li>• <span className="font-semibold">Zero Unmeasured Numbers:</span> Only reference statically verifiable outcomes and benchmarked metrics; anchor every claim in reproducible code and receipts.</li>
-                <li>• <span className="font-semibold">Evaluation-Driven Delivery:</span> Measure retrieval accuracy, faithfulness, and LLM-as-a-judge alignment (&kappa; &ge; 0.80) prior to production deployment.</li>
+                <li>• <span className="font-semibold">Evaluation-Driven Delivery:</span> Measure retrieval accuracy, faithfulness, and LLM-as-a-judge alignment prior to production deployment.</li>
               </ul>
             </div>
           </div>
@@ -155,7 +155,7 @@ const HomePage: React.FC = () => {
               <ul className="text-gray-600 space-y-2">
                 <li>• LangSmith Trace & Observability</li>
                 <li>• RAGAS Faithfulness & Relevance</li>
-                <li>• LLM-as-a-Judge Calibration (&kappa; &ge; 0.80)</li>
+                <li>• LLM-as-a-Judge Calibration &amp; Scoring</li>
                 <li>• Deterministic Offline Test Fixtures</li>
                 <li>• Automated Rubrics & Run Provenance</li>
               </ul>
@@ -285,7 +285,7 @@ const HomePage: React.FC = () => {
               to="/assets/projects"
               className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center gap-1 mt-2 md:mt-0"
             >
-              View Full Projects Portfolio ({">"}15 Projects) &rarr;
+              View Full Projects Portfolio (14 Projects) &rarr;
             </Link>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -374,29 +374,29 @@ const HomePage: React.FC = () => {
           {/* Introduction with Impact Stats */}
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">AI Makerspace Lead Mentor</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">AI Makerspace Grading Manager &amp; Peer Supporter</h3>
               <p className="text-lg text-gray-600 mb-4">
-                Certified AI Engineer Bootcamp &bull; Cohorts 6, 7, 8, 9 &amp; v1.0 + 2 On-Ramp Cohorts (2024&ndash;2026)
+                Bootcamp v1.0 Grading Operations &bull; Peer Supporter Across 5 AI Engineering Cohorts
               </p>
-              <div className="inline-block bg-green-100 border-2 border-green-500 rounded-lg px-6 py-3">
-                <p className="text-green-800 font-bold text-xl">
-                  Consistently Low Dropout Rate: &lt;10% in Cohorts 6&ndash;8 (vs. 20-30% average)
+              <div className="inline-block bg-green-100 border-2 border-green-600 rounded-lg px-6 py-3">
+                <p className="text-green-800 font-bold text-lg">
+                  Grading Operations &bull; 20-Point Certification Rubric Author &bull; 150+ Engineers Trained
                 </p>
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-6 mt-6">
               <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <p className="text-3xl font-bold text-blue-600 mb-2">100+</p>
-                <p className="text-gray-700">Engineers Mentored Through Production-Grade RAG &amp; Agent Systems</p>
+                <p className="text-3xl font-bold text-blue-600 mb-2">150+</p>
+                <p className="text-gray-700">Engineers Trained Through Production-Grade RAG &amp; Agent Systems</p>
               </div>
               <div className="text-center p-4 bg-purple-50 rounded-lg">
-                <p className="text-3xl font-bold text-purple-600 mb-2">7 Cohorts</p>
-                <p className="text-gray-700">5 Intensive Bootcamps (6, 7, 8, 9, v1.0) + 2 Pre-Bootcamp On-Ramps</p>
+                <p className="text-3xl font-bold text-purple-600 mb-2">5 Cohorts</p>
+                <p className="text-gray-700">Bootcamp Cohorts Supported with Weekly Breakouts, Office Hours &amp; Rubric Grading</p>
               </div>
             </div>
             <div className="mt-6 text-center">
               <p className="text-gray-700 italic">
-                <span className="font-semibold">Teaching Philosophy:</span> Ground theory in verifiable systems code. Make it click, eliminate failure points, and prepare engineers for real-world production.
+                <span className="font-semibold">Mentorship Philosophy:</span> Ground evaluation in verifiable submission evidence. Author clear rubrics, make grading judgment consistent, and prepare engineers for production reality.
               </p>
             </div>
           </div>
