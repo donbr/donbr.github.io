@@ -285,7 +285,7 @@ const HomePage: React.FC = () => {
               to="/assets/projects"
               className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center gap-1 mt-2 md:mt-0"
             >
-              View Full Projects Portfolio (14 Projects) &rarr;
+              View Full Projects Portfolio &rarr;
             </Link>
           </div>
           <div className="grid md:grid-cols-2 gap-8">

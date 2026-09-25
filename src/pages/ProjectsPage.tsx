@@ -38,8 +38,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'LangGraph': 'bg-blue-100 text-blue-800',
     'LangChain': 'bg-blue-100 text-blue-800',
     'Bioinformatics': 'bg-purple-100 text-purple-800',
-    'Architecture': 'bg-amber-100 text-amber-800',
-    'Open Source': 'bg-emerald-100 text-emerald-800',
     'ChEMBL': 'bg-cyan-100 text-cyan-800',
     'Open Targets': 'bg-sky-100 text-sky-800',
     'Drug Discovery': 'bg-rose-100 text-rose-800',
@@ -183,8 +181,7 @@ const ProjectsPage: React.FC = () => {
       description: "Production Next.js 14 frontend and interactive evaluation dashboard for GDELT Knowledge Base RAG pipelines. Features live geographic event mapping with Leaflet, record inspection, tone analysis, and real-time query evaluation.",
       tags: ["Next.js", "React", "Tailwind CSS", "Data Visualization", "Vercel"],
       codeUrl: "https://github.com/donbr/gdelt-ui-demo",
-      demoUrl: "https://gdelt-ui-demo.vercel.app",
-      detailUrl: "/assets/projects/gdelt"
+      demoUrl: "https://gdelt-ui-demo.vercel.app"
     },
     {
       title: "Multi-Modal Florence-2 Vision Fine-Tuning & MLOps",
