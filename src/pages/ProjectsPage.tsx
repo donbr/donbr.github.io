@@ -26,10 +26,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'Next.js': 'bg-slate-100 text-slate-800',
     'Tailwind CSS': 'bg-green-100 text-green-800',
     'Leaflet': 'bg-purple-100 text-purple-800',
+    'Data Visualization': 'bg-yellow-100 text-yellow-800',
     'Composable Gateway': 'bg-emerald-100 text-emerald-800',
     'FastMCP Servers': 'bg-teal-100 text-teal-800',
     'FastMCP': 'bg-emerald-100 text-emerald-800',
     'Model Context Protocol': 'bg-teal-100 text-teal-800',
+    'Distributed Systems': 'bg-cyan-100 text-cyan-800',
+    'JavaScript': 'bg-amber-100 text-amber-800',
+    'TypeScript': 'bg-blue-100 text-blue-800',
     'Temporal.io': 'bg-indigo-100 text-indigo-800',
     'LangGraph': 'bg-blue-100 text-blue-800',
     'LangChain': 'bg-blue-100 text-blue-800',
@@ -130,6 +134,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     </>
   );
 
+  if (detailUrl) {
+    return (
+      <Link to={detailUrl} className="block">
+        <div className="bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200 cursor-pointer">
+          {cardContent}
+        </div>
+      </Link>
+    );
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200">
       {cardContent}
@@ -143,8 +157,7 @@ const ProjectsPage: React.FC = () => {
       title: "Open Biosciences: Composable MCP Gateway & Life-Sciences Platform",
       description: "A composable gateway unifying 12 domain-focused FastMCP servers and 34+ MCP tools across authoritative life-sciences sources—including ChEMBL, Open Targets, UniProt, and Ensembl—behind a unified interface. Provides modular server composition, consolidated tool discovery and invocation, schema-validated contracts, and strict identifier-resolution guardrails for reliable biomedical agent workflows.",
       tags: ["Composable Gateway", "FastMCP Servers", "Temporal.io", "LangGraph", "Bioinformatics"],
-      codeUrl: "https://github.com/open-biosciences/biosciences-program",
-      demoUrl: "https://github.com/open-biosciences"
+      codeUrl: "https://github.com/open-biosciences/biosciences-program"
     },
     {
       title: "Open Biosciences FastMCP Tool Harnesses",
@@ -163,7 +176,6 @@ const ProjectsPage: React.FC = () => {
       description: "Production-grade RAG reference architecture and offline evaluation harness for global geopolitical event analysis. Features a 5-layer architecture with comparative evaluation showing Cohere Rerank achieving 95.1% accuracy. Published 4 datasets to Hugging Face Hub with SHA-256 provenance tracking.",
       tags: ["LangGraph", "RAG", "Vector Search", "Cohere", "Evaluation Metrics", "Python"],
       codeUrl: "https://github.com/donbr/gdelt-knowledge-base",
-      demoUrl: "https://gdelt-ui-demo.vercel.app",
       detailUrl: "/assets/projects/gdelt-knowledge-base"
     },
     {
@@ -171,7 +183,8 @@ const ProjectsPage: React.FC = () => {
       description: "Production Next.js 14 frontend and interactive evaluation dashboard for GDELT Knowledge Base RAG pipelines. Features live geographic event mapping with Leaflet, record inspection, tone analysis, and real-time query evaluation.",
       tags: ["Next.js", "React", "Tailwind CSS", "Data Visualization", "Vercel"],
       codeUrl: "https://github.com/donbr/gdelt-ui-demo",
-      demoUrl: "https://gdelt-ui-demo.vercel.app"
+      demoUrl: "https://gdelt-ui-demo.vercel.app",
+      detailUrl: "/assets/projects/gdelt"
     },
     {
       title: "Multi-Modal Florence-2 Vision Fine-Tuning & MLOps",
