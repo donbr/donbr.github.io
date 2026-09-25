@@ -68,18 +68,18 @@ No lazy loading is used - all components are directly imported.
 
 ### Project Data Management
 
-Projects are defined inline as a simple array in `ProjectsPage.tsx` (lines 130-205). Each project has:
+Projects are defined inline as a simple array in `ProjectsPage.tsx` (lines 153-242). Each project has:
 - title
 - description
-- tags (with color mapping defined in tagColorMap at lines 24-70)
+- tags (with color mapping defined in tagColorMap at lines 24-73)
 - Optional: demoUrl, codeUrl, huggingFaceUrl, detailUrl
 
-The ProjectCard component is also defined inline in ProjectsPage.tsx (lines 15-127).
+The ProjectCard component is also defined inline in ProjectsPage.tsx (lines 15-150).
 
 ### Layout Component
 
 The Layout component (`src/components/layout/Layout.tsx`) wraps all pages and provides:
-- Navigation bar with links to sections (About, Expertise, Certifications, Projects, Teaching, Contact, Graph Demos)
+- Navigation bar with links to sections (About, Expertise, Publications, Projects, Concepts, Teaching, Certifications, Contact, Graph Demos)
 - Active link highlighting using hash-based navigation for sections and pathname for Projects
 - Footer with social links (GitHub, LinkedIn, Graph Visualizations)
 

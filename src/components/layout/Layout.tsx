@@ -52,13 +52,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 Expertise
               </a>
               <a 
-                href="/#certifications" 
+                href="/#publications" 
                 className={cn(
                   "py-4 px-2 hover:text-gray-900",
-                  location.hash === '#certifications' ? "text-gray-900 border-b-2 border-blue-500" : "text-gray-500"
+                  location.hash === '#publications' ? "text-gray-900 border-b-2 border-blue-500" : "text-gray-500"
                 )}
               >
-                Certifications
+                Publications
               </a>
               <Link
                 to="/assets/projects"
@@ -86,6 +86,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 )}
               >
                 Teaching
+              </a>
+              <a 
+                href="/#certifications" 
+                className={cn(
+                  "py-4 px-2 hover:text-gray-900",
+                  location.hash === '#certifications' ? "text-gray-900 border-b-2 border-blue-500" : "text-gray-500"
+                )}
+              >
+                Certifications
               </a>
               <a
                 href="/#contact"
