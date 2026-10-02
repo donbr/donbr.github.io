@@ -10,18 +10,11 @@ import App from './App'
 const RELOAD_KEY = 'chunk-reload-at'
 
 window.addEventListener('vite:preloadError', (event) => {
-  let lastReload = 0
   try {
-    lastReload = Number(sessionStorage.getItem(RELOAD_KEY) ?? 0)
-  } catch {
-    return // storage unavailable: let the error boundary handle it
-  }
-  if (Date.now() - lastReload < 10_000) return
-
-  try {
+    if (Date.now() - Number(sessionStorage.getItem(RELOAD_KEY)) < 10_000) return
     sessionStorage.setItem(RELOAD_KEY, String(Date.now()))
   } catch {
-    return
+    return // storage unavailable: let the error boundary handle it
   }
   event.preventDefault()
   window.location.reload()
