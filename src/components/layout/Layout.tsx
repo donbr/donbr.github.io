@@ -120,19 +120,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </button>
           </div>
 
-          {/* Mobile links */}
-          {menuOpen && (
-            <div id="mobile-menu" className="lg:hidden border-t border-gray-200 py-2">
-              {navItems.map((item) =>
-                renderNavLink(
-                  item,
-                  "block py-3 px-2 rounded-md text-base hover:bg-gray-50 hover:text-gray-900",
-                  "text-gray-900 font-semibold",
-                  "text-gray-600"
-                )
-              )}
-            </div>
-          )}
+          {/* Mobile links: always rendered (hidden when closed) so the button's aria-controls target exists */}
+          <div id="mobile-menu" hidden={!menuOpen} className="lg:hidden border-t border-gray-200 py-2">
+            {navItems.map((item) =>
+              renderNavLink(
+                item,
+                "block py-3 px-2 rounded-md text-base hover:bg-gray-50 hover:text-gray-900",
+                "text-gray-900 font-semibold",
+                "text-gray-600"
+              )
+            )}
+          </div>
         </div>
       </nav>
 
