@@ -5,6 +5,9 @@ import { cn } from '@/lib/utils.ts';
 
 interface LayoutProps {
   children: React.ReactNode;
+  // Rendered as "<title> | Don Branson" (React 19 hoists it into <head>). Omit it to keep
+  // the full site title from index.html, as the homepage does.
+  title?: string;
 }
 
 type NavItem =
@@ -23,7 +26,20 @@ const navItems: NavItem[] = [
   { label: 'Graph Demos', kind: 'external', href: 'https://graph-viz-next.vercel.app/' },
 ];
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const navStyles = {
+  desktop: {
+    base: 'py-4 px-2 whitespace-nowrap hover:text-gray-900',
+    active: 'text-gray-900 border-b-2 border-blue-500',
+    inactive: 'text-gray-500',
+  },
+  mobile: {
+    base: 'block py-3 px-2 rounded-md text-base hover:bg-gray-50 hover:text-gray-900',
+    active: 'text-gray-900 font-semibold',
+    inactive: 'text-gray-600',
+  },
+} as const;
+
+const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -37,24 +53,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [menuOpen]);
 
-  const isActive = (path: string) => {
-    if (path === '/' && location.pathname === '/') {
-      return true;
-    }
-    if (path !== '/' && location.pathname.startsWith(path)) {
-      return true;
-    }
-    return false;
-  };
+  const isItemActive = (item: NavItem) =>
+    item.kind === 'hash'
+      ? location.hash === item.hash
+      : item.kind === 'route' && location.pathname.startsWith(item.to);
 
-  const isItemActive = (item: NavItem) => {
-    if (item.kind === 'hash') return location.hash === item.hash;
-    if (item.kind === 'route') return isActive(item.to);
-    return false;
-  };
-
-  const renderNavLink = (item: NavItem, className: string, activeClassName: string, inactiveClassName: string) => {
-    const classes = cn(className, isItemActive(item) ? activeClassName : inactiveClassName);
+  const renderNavLink = (item: NavItem, variant: keyof typeof navStyles) => {
+    const styles = navStyles[variant];
+    const classes = cn(styles.base, isItemActive(item) ? styles.active : styles.inactive);
     const closeMenu = () => setMenuOpen(false);
 
     if (item.kind === 'route') {
@@ -71,7 +77,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           href={item.href}
           target="_blank"
           rel="noopener noreferrer"
-          className={cn(className, "text-blue-600 hover:text-blue-800")}
+          className={cn(styles.base, "text-blue-600 hover:text-blue-800")}
           onClick={closeMenu}
         >
           {item.label}
@@ -87,6 +93,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
+      {title && <title>{`${title} | Don Branson`}</title>}
+
       {/* Navigation */}
       <nav className="bg-white shadow-lg" aria-label="Primary">
         <div className="max-w-6xl mx-auto px-4">
@@ -97,14 +105,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Desktop links */}
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-3 text-sm xl:text-base">
-              {navItems.map((item) =>
-                renderNavLink(
-                  item,
-                  "py-4 px-2 whitespace-nowrap hover:text-gray-900",
-                  "text-gray-900 border-b-2 border-blue-500",
-                  "text-gray-500"
-                )
-              )}
+              {navItems.map((item) => renderNavLink(item, 'desktop'))}
             </div>
 
             {/* Mobile menu button */}
@@ -122,14 +123,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           {/* Mobile links: always rendered (hidden when closed) so the button's aria-controls target exists */}
           <div id="mobile-menu" hidden={!menuOpen} className="lg:hidden border-t border-gray-200 py-2">
-            {navItems.map((item) =>
-              renderNavLink(
-                item,
-                "block py-3 px-2 rounded-md text-base hover:bg-gray-50 hover:text-gray-900",
-                "text-gray-900 font-semibold",
-                "text-gray-600"
-              )
-            )}
+            {navItems.map((item) => renderNavLink(item, 'mobile'))}
           </div>
         </div>
       </nav>

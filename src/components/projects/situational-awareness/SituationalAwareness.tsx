@@ -105,8 +105,7 @@ const SituationalAwareness: React.FC = () => {
   }, []);
 
   return (
-    <Layout>
-      <title>Situational Awareness Graph | Don Branson</title>
+    <Layout title="Situational Awareness Graph">
       <div className="bg-white py-8">
         <div className="max-w-6xl mx-auto px-4">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Situational Awareness Graph</h1>

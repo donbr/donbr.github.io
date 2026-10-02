@@ -72,8 +72,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     'Vercel': 'bg-zinc-100 text-zinc-800'
   };
 
-  const cardContent = (
-    <>
+  return (
+    <div className="relative bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200">
       <h2 className="text-xl font-semibold text-gray-800 mb-3">
         {detailUrl ? (
           // Stretched link: the ::after overlay makes the whole card clickable without nesting links
@@ -97,11 +97,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </span>
         ))}
       </div>
-      <div className="mt-4 pt-3 border-t border-gray-100 flex flex-wrap gap-4 text-sm font-semibold">
+      {/* [&>a]: lifts every action link above the title's stretched-link overlay */}
+      <div className="mt-4 pt-3 border-t border-gray-100 flex flex-wrap gap-4 text-sm font-semibold [&>a]:relative [&>a]:z-10">
         {detailUrl && (
           <Link
             to={detailUrl}
-            className="relative z-10 text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
+            className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
           >
             Deep Dive <span className="text-sm">&rarr;</span>
           </Link>
@@ -111,7 +112,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative z-10 text-emerald-600 hover:text-emerald-800 inline-flex items-center gap-1"
+            className="text-emerald-600 hover:text-emerald-800 inline-flex items-center gap-1"
           >
             Live Demo <span className="text-sm">&#8599;</span>
           </a>
@@ -121,7 +122,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={codeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative z-10 text-gray-700 hover:text-black inline-flex items-center gap-1"
+            className="text-gray-700 hover:text-black inline-flex items-center gap-1"
           >
             Repository <span className="text-sm">&#8599;</span>
           </a>
@@ -131,18 +132,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={huggingFaceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative z-10 text-amber-700 hover:text-amber-900 inline-flex items-center gap-1"
+            className="text-amber-700 hover:text-amber-900 inline-flex items-center gap-1"
           >
             Hugging Face <span className="text-sm">&#8599;</span>
           </a>
         )}
       </div>
-    </>
-  );
-
-  return (
-    <div className="relative bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200">
-      {cardContent}
     </div>
   );
 };
@@ -240,8 +235,7 @@ const ProjectsPage: React.FC = () => {
   ];
 
   return (
-    <Layout>
-      <title>Projects | Don Branson</title>
+    <Layout title="Projects">
       <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="mb-8">
