@@ -3,8 +3,8 @@ import StatusPage from '@/components/layout/StatusPage';
 
 // Browsers word a failed dynamic import differently: Chrome/Edge "Failed to fetch dynamically
 // imported module", Firefox "error loading dynamically imported module", Safari "Importing a
-// module script failed".
-const CHUNK_LOAD_ERROR = /dynamically imported module|Importing a module script failed/i;
+// module script failed". Vite adds "Unable to preload CSS for ..." when a route's CSS fails.
+const CHUNK_LOAD_ERROR = /dynamically imported module|Importing a module script failed|Unable to preload CSS/i;
 
 interface RouteErrorBoundaryProps {
   children: React.ReactNode;
