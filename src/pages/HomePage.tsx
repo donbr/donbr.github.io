@@ -24,6 +24,7 @@ const HomePage: React.FC = () => {
 
   return (
     <Layout>
+      <title>Don Branson | Generative AI Architect &amp; Systems Engineer</title>
       {/* Hero Section */}
       <div className="bg-white">
         <div className="max-w-6xl mx-auto px-4 py-16">

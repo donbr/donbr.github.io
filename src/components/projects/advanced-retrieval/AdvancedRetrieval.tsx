@@ -5,6 +5,7 @@ import { Github, BookOpen } from 'lucide-react';
 const AdvancedRetrieval: React.FC = () => {
   return (
     <Layout>
+      <title>Advanced Retrieval Strategies for RAG | Don Branson</title>
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white py-16">
         <div className="max-w-6xl mx-auto px-4">

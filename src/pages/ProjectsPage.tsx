@@ -241,6 +241,7 @@ const ProjectsPage: React.FC = () => {
 
   return (
     <Layout>
+      <title>Projects | Don Branson</title>
       <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="mb-8">
