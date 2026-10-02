@@ -17,7 +17,6 @@ const navItems: NavItem[] = [
   { label: 'Expertise', kind: 'hash', hash: '#expertise' },
   { label: 'Publications', kind: 'hash', hash: '#publications' },
   { label: 'Projects', kind: 'route', to: '/assets/projects' },
-  { label: 'Concepts', kind: 'route', to: '/concepts' },
   { label: 'Teaching', kind: 'hash', hash: '#teaching' },
   { label: 'Certifications', kind: 'hash', hash: '#certifications' },
   { label: 'Contact', kind: 'hash', hash: '#contact' },
