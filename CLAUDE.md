@@ -39,6 +39,7 @@ npm run deploy           # Deploy to GitHub Pages (runs predeploy build automati
   - `NotFoundPage.tsx`: 404 page
 - **src/components/**: React components
   - `layout/Layout.tsx`: Main layout wrapper with navigation and footer
+  - `layout/RouteErrorBoundary.tsx`: Error boundary around the routes (reload prompt when a lazy chunk fails to load)
   - `ui/`: shadcn/ui components (button, etc.)
   - `projects/`: Project-specific components, each in its own subdirectory
     - `gdelt/GdeltRecordViewer.tsx`: GDELT data viewer
@@ -68,13 +69,13 @@ HomePage, ProjectsPage and NotFoundPage are imported directly; every project rou
 
 ### Project Data Management
 
-Projects are defined inline as a simple array in `ProjectsPage.tsx` (lines 153-242). Each project has:
+Projects are defined inline as a simple `projects` array in `ProjectsPage.tsx`. Each project has:
 - title
 - description
-- tags (with color mapping defined in tagColorMap at lines 24-73)
+- tags (with color mapping defined in `tagColorMap` inside `ProjectCard`)
 - Optional: demoUrl, codeUrl, huggingFaceUrl, detailUrl
 
-The ProjectCard component is also defined inline in ProjectsPage.tsx (lines 15-150).
+The `ProjectCard` component is also defined inline in `ProjectsPage.tsx`.
 
 ### Layout Component
 
