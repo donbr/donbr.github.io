@@ -235,6 +235,7 @@ const EventAnalyzer: React.FC = () => {
 
   return (
     <Layout>
+      <title>Event Analysis System | Don Branson</title>
       <div className="max-w-6xl mx-auto px-4 py-16">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">Event Analysis System</h1>
         <p className="text-gray-600 mb-8">

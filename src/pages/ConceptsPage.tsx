@@ -4,6 +4,7 @@ import Layout from '@/components/layout/Layout';
 const ConceptsPage: React.FC = () => {
   return (
     <Layout>
+      <title>MCP Architecture: Concepts Before Code | Don Branson</title>
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 py-16">
         <div className="max-w-6xl mx-auto px-4">

@@ -355,6 +355,7 @@ const GdeltRecordViewer: React.FC = () => {
 
   return (
     <Layout>
+      <title>GDELT GKG Viewer | Don Branson</title>
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="bg-white rounded-lg shadow-md p-6">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">GDELT GKG Viewer</h1>
