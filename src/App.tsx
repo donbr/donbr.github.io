@@ -30,7 +30,7 @@ const AppRoutes: React.FC = () => {
   const location = useLocation();
 
   return (
-    <RouteErrorBoundary resetKey={location.pathname}>
+    <RouteErrorBoundary resetKey={location.key}>
       <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<HomePage />} />

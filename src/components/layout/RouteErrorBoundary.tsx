@@ -8,7 +8,8 @@ const CHUNK_LOAD_ERROR = /dynamically imported module|Importing a module script 
 
 interface RouteErrorBoundaryProps {
   children: React.ReactNode;
-  // Changing this (the current pathname) clears the error, so nav links still work
+  // Changing this (the current location.key, new on every navigation) clears the error,
+  // so nav links work, including 'Go to homepage' from an error on '/'
   resetKey: string;
 }
 
