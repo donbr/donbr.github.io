@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils.ts';
@@ -41,13 +41,22 @@ const navStyles = {
 
 const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Close the mobile menu on Escape
+  // The menu is open only for the location it was opened at, so any navigation
+  // (link, back/forward, hash change) closes it without an extra effect
+  const [menuOpenAt, setMenuOpenAt] = useState<string | null>(null);
+  const menuOpen = menuOpenAt === location.key;
+  const closeMenu = () => setMenuOpenAt(null);
+
+  // Close the mobile menu on Escape and return focus to the toggle button
   useEffect(() => {
     if (!menuOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMenuOpen(false);
+      if (e.key === 'Escape') {
+        setMenuOpenAt(null);
+        menuButtonRef.current?.focus();
+      }
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
@@ -61,7 +70,6 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const renderNavLink = (item: NavItem, variant: keyof typeof navStyles) => {
     const styles = navStyles[variant];
     const classes = cn(styles.base, isItemActive(item) ? styles.active : styles.inactive);
-    const closeMenu = () => setMenuOpen(false);
 
     if (item.kind === 'route') {
       return (
@@ -110,12 +118,13 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 
             {/* Mobile menu button */}
             <button
+              ref={menuButtonRef}
               type="button"
               className="lg:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               aria-controls="mobile-menu"
               aria-expanded={menuOpen}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              onClick={() => setMenuOpen((open) => !open)}
+              onClick={() => setMenuOpenAt(menuOpen ? null : location.key)}
             >
               {menuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
             </button>
