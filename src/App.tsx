@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
+import RouteErrorBoundary from '@/components/layout/RouteErrorBoundary';
 
 // Page Components (HomePage and NotFoundPage are small, so they stay in the main bundle)
 import HomePage from '@/pages/HomePage';
@@ -26,9 +27,11 @@ const RouteFallback: React.FC = () => (
   </Layout>
 );
 
-const App: React.FC = () => {
+const AppRoutes: React.FC = () => {
+  const location = useLocation();
+
   return (
-    <BrowserRouter>
+    <RouteErrorBoundary resetKey={location.pathname}>
       <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -46,6 +49,14 @@ const App: React.FC = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+    </RouteErrorBoundary>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 };
