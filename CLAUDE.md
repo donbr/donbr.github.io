@@ -40,6 +40,7 @@ npm run deploy           # Deploy to GitHub Pages (runs predeploy build automati
 - **src/components/**: React components
   - `layout/Layout.tsx`: Main layout wrapper with navigation and footer
   - `layout/RouteErrorBoundary.tsx`: Error boundary around the routes (reload prompt when a lazy chunk fails to load)
+  - `layout/StatusPage.tsx`: Full-page message with actions, shared by the 404 page and the error boundary
   - `ui/`: shadcn/ui components (button, etc.)
   - `projects/`: Project-specific components, each in its own subdirectory
     - `gdelt/GdeltRecordViewer.tsx`: GDELT data viewer
@@ -153,5 +154,5 @@ Located in `src/data/`:
 - No testing framework is currently configured
 - No formatter (like Prettier) is configured in package.json
 - Project detail routes are code-split with `React.lazy`, wrapped in `RouteErrorBoundary` (shows a reload prompt if a chunk fails to load, e.g. after a deploy)
-- Each page renders its own `<title>` inside `<Layout>` (React 19 hoists it into `<head>`); format: `Page Name | Don Branson`. Exception: HomePage uses the full `Don Branson | Generative AI Architect & Systems Engineer`, matching the static title in `index.html`
+- Page titles: pass `title` to `<Layout>` (e.g. `<Layout title="Projects">`); Layout renders `<title>Projects | Don Branson</title>`, which React 19 hoists into `<head>`. Omit it to keep the full site title from `index.html` (the homepage does)
 - Some project components include their own types (e.g., situational-awareness/types.ts)
