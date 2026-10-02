@@ -3,14 +3,13 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import RouteErrorBoundary from '@/components/layout/RouteErrorBoundary';
 
-// Page Components (HomePage and NotFoundPage are small, so they stay in the main bundle)
+// Page Components: small and light, so they stay in the main bundle (ProjectsPage is
+// the most-visited secondary route; splitting its ~11 KB out only added a round trip)
 import HomePage from '@/pages/HomePage';
+import ProjectsPage from '@/pages/ProjectsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
-// Lazy-loaded routes: keeps ECharts, Cytoscape and Leaflet out of the homepage bundle
-const ProjectsPage = lazy(() => import('@/pages/ProjectsPage'));
-
-// Project Components
+// Lazy-loaded project routes: keeps ECharts, Cytoscape and Leaflet out of the main bundle
 const GdeltRecordViewer = lazy(() => import('@/components/projects/gdelt/GdeltRecordViewer'));
 const CytoscapeViewer = lazy(() => import('@/components/projects/cytoscape/CytoscapeViewer'));
 const EventAnalyzer = lazy(() => import('@/components/projects/event-analyzer/EventAnalyzer'));
