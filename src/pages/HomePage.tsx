@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 
 const HomePage: React.FC = () => {
+  const navigate = useNavigate();
+
   // Handle smooth scrolling for anchor links
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
@@ -12,15 +14,16 @@ const HomePage: React.FC = () => {
         const element = document.querySelector(target.hash);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
-          // Update URL without reload
-          window.history.pushState(null, '', target.hash);
+          // Update the URL through the router (not history.pushState) so location.hash,
+          // the nav's active state and back/forward stay in sync
+          navigate({ hash: target.hash });
         }
       }
     };
 
     document.addEventListener('click', handleAnchorClick);
     return () => document.removeEventListener('click', handleAnchorClick);
-  }, []);
+  }, [navigate]);
 
   return (
     <Layout>
