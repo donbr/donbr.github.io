@@ -79,7 +79,7 @@ The ProjectCard component is also defined inline in ProjectsPage.tsx (lines 15-1
 ### Layout Component
 
 The Layout component (`src/components/layout/Layout.tsx`) wraps all pages and provides:
-- Navigation bar with links to sections (About, Expertise, Publications, Projects, Concepts, Teaching, Certifications, Contact, Graph Demos)
+- Navigation bar with links to sections (About, Expertise, Publications, Projects, Teaching, Certifications, Contact, Graph Demos)
 - Active link highlighting using hash-based navigation for sections and pathname for Projects
 - Footer with social links (GitHub, LinkedIn, Graph Visualizations)
 

@@ -8,7 +8,6 @@ import NotFoundPage from '@/pages/NotFoundPage';
 
 // Lazy-loaded routes: keeps ECharts, Cytoscape and Leaflet out of the homepage bundle
 const ProjectsPage = lazy(() => import('@/pages/ProjectsPage'));
-const ConceptsPage = lazy(() => import('@/pages/ConceptsPage'));
 
 // Project Components
 const GdeltRecordViewer = lazy(() => import('@/components/projects/gdelt/GdeltRecordViewer'));
@@ -34,7 +33,6 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/assets/projects" element={<ProjectsPage />} />
-          <Route path="/concepts" element={<ConceptsPage />} />
 
           {/* Project routes */}
           <Route path="/assets/projects/gdelt" element={<GdeltRecordViewer />} />
