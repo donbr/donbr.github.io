@@ -74,7 +74,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   const cardContent = (
     <>
-      <h2 className="text-xl font-semibold text-gray-800 mb-3">{title}</h2>
+      <h2 className="text-xl font-semibold text-gray-800 mb-3">
+        {detailUrl ? (
+          // Stretched link: the ::after overlay makes the whole card clickable without nesting links
+          <Link
+            to={detailUrl}
+            className="hover:text-blue-700 focus:outline-none after:absolute after:inset-0 after:rounded-lg focus-visible:after:ring-2 focus-visible:after:ring-blue-500"
+          >
+            {title}
+          </Link>
+        ) : (
+          title
+        )}
+      </h2>
       <p className="text-gray-600 text-sm mb-4 leading-relaxed">
         {description}
       </p>
@@ -89,8 +101,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {detailUrl && (
           <Link
             to={detailUrl}
-            className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
-            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
           >
             Deep Dive <span className="text-sm">&rarr;</span>
           </Link>
@@ -100,8 +111,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-emerald-600 hover:text-emerald-800 inline-flex items-center gap-1"
-            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 text-emerald-600 hover:text-emerald-800 inline-flex items-center gap-1"
           >
             Live Demo <span className="text-sm">&#8599;</span>
           </a>
@@ -111,8 +121,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={codeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-700 hover:text-black inline-flex items-center gap-1"
-            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 text-gray-700 hover:text-black inline-flex items-center gap-1"
           >
             Repository <span className="text-sm">&#8599;</span>
           </a>
@@ -122,8 +131,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             href={huggingFaceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-700 hover:text-amber-900 inline-flex items-center gap-1"
-            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 text-amber-700 hover:text-amber-900 inline-flex items-center gap-1"
           >
             Hugging Face <span className="text-sm">&#8599;</span>
           </a>
@@ -132,18 +140,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     </>
   );
 
-  if (detailUrl) {
-    return (
-      <Link to={detailUrl} className="block">
-        <div className="bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200 cursor-pointer">
-          {cardContent}
-        </div>
-      </Link>
-    );
-  }
-
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200">
+    <div className="relative bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200">
       {cardContent}
     </div>
   );
