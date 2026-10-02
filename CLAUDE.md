@@ -64,7 +64,7 @@ Simple React Router setup in App.tsx:
 - `/assets/projects/advanced-retrieval` - AdvancedRetrieval
 - `*` - NotFoundPage (404)
 
-No lazy loading is used - all components are directly imported.
+HomePage and NotFoundPage are imported directly; every other route is loaded with `React.lazy` inside one `Suspense` boundary (fallback keeps the Layout visible). This keeps ECharts, Cytoscape and Leaflet out of the homepage bundle - add new project routes the same way.
 
 ### Project Data Management
 
@@ -151,5 +151,6 @@ Located in `src/data/`:
 
 - No testing framework is currently configured
 - No formatter (like Prettier) is configured in package.json
-- Project uses direct imports (no code splitting/lazy loading)
+- Routes other than Home and 404 are code-split with `React.lazy`
+- Each page renders its own `<title>` inside `<Layout>` (React 19 hoists it into `<head>`); format: `Page Name | Don Branson`
 - Some project components include their own types (e.g., situational-awareness/types.ts)
