@@ -152,5 +152,5 @@ Located in `src/data/`:
 - No testing framework is currently configured
 - No formatter (like Prettier) is configured in package.json
 - Project detail routes are code-split with `React.lazy`, wrapped in `RouteErrorBoundary` (shows a reload prompt if a chunk fails to load, e.g. after a deploy)
-- Each page renders its own `<title>` inside `<Layout>` (React 19 hoists it into `<head>`); format: `Page Name | Don Branson`
+- Each page renders its own `<title>` inside `<Layout>` (React 19 hoists it into `<head>`); format: `Page Name | Don Branson`. Exception: HomePage uses the full `Don Branson | Generative AI Architect & Systems Engineer`, matching the static title in `index.html`
 - Some project components include their own types (e.g., situational-awareness/types.ts)
