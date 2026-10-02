@@ -62,6 +62,18 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [menuOpen]);
 
+  // Close the mobile menu when the viewport reaches the lg breakpoint (where it's hidden),
+  // so it doesn't reappear open after e.g. rotating a tablet to landscape and back
+  useEffect(() => {
+    if (!menuOpen) return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setMenuOpenAt(null);
+    };
+    desktop.addEventListener('change', handleChange);
+    return () => desktop.removeEventListener('change', handleChange);
+  }, [menuOpen]);
+
   const isItemActive = (item: NavItem) =>
     item.kind === 'hash'
       ? location.hash === item.hash
