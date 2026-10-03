@@ -42,20 +42,25 @@ const navStyles = {
 const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const location = useLocation();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  // The menu is open only for the location it was opened at, so any navigation
-  // (link, back/forward, hash change) closes it without an extra effect
-  const [menuOpenAt, setMenuOpenAt] = useState<string | null>(null);
-  const menuOpen = menuOpenAt === location.key;
-  const closeMenu = () => setMenuOpenAt(null);
+  // Any navigation closes the menu: link, back/forward or a native hash change. The key
+  // includes pathname, search and hash because location.key alone can stay 'default'
+  // (initial load, native fragment navigation). Reset during render, not in an effect.
+  const navKey = `${location.pathname}${location.search}${location.hash}:${location.key}`;
+  const [menu, setMenu] = useState({ open: false, navKey });
+  if (menu.navKey !== navKey) setMenu({ open: false, navKey });
+  const menuOpen = menu.open && menu.navKey === navKey;
+  const setMenuOpen = (open: boolean) => setMenu({ open, navKey });
+  const closeMenu = () => setMenuOpen(false);
 
-  // Close the mobile menu on Escape and return focus to the toggle button
+  // Close the mobile menu on Escape; if focus was inside it, return focus to the toggle
   useEffect(() => {
     if (!menuOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setMenuOpenAt(null);
-        menuButtonRef.current?.focus();
+        if (menuRef.current?.contains(document.activeElement)) menuButtonRef.current?.focus();
+        setMenu((m) => ({ ...m, open: false }));
       }
     };
     document.addEventListener('keydown', handleKeyDown);
@@ -68,7 +73,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
     if (!menuOpen) return;
     const desktop = window.matchMedia('(min-width: 1024px)');
     const handleChange = (e: MediaQueryListEvent) => {
-      if (e.matches) setMenuOpenAt(null);
+      if (e.matches) setMenu((m) => ({ ...m, open: false }));
     };
     desktop.addEventListener('change', handleChange);
     return () => desktop.removeEventListener('change', handleChange);
@@ -136,14 +141,14 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
               aria-controls="mobile-menu"
               aria-expanded={menuOpen}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              onClick={() => setMenuOpenAt(menuOpen ? null : location.key)}
+              onClick={() => setMenuOpen(!menuOpen)}
             >
               {menuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
             </button>
           </div>
 
           {/* Mobile links: always rendered (hidden when closed) so the button's aria-controls target exists */}
-          <div id="mobile-menu" hidden={!menuOpen} className="lg:hidden border-t border-gray-200 py-2">
+          <div id="mobile-menu" ref={menuRef} hidden={!menuOpen} className="lg:hidden border-t border-gray-200 py-2">
             {navItems.map((item) => renderNavLink(item, 'mobile'))}
           </div>
         </div>
