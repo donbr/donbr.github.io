@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils.ts';
@@ -41,16 +41,42 @@ const navStyles = {
 
 const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  // Close the mobile menu on Escape
+  // Any navigation closes the menu: link, back/forward or a native hash change. The key
+  // includes pathname, search and hash because location.key alone can stay 'default'
+  // (initial load, native fragment navigation). Reset during render, not in an effect.
+  const navKey = `${location.pathname}${location.search}${location.hash}:${location.key}`;
+  const [menu, setMenu] = useState({ open: false, navKey });
+  if (menu.navKey !== navKey) setMenu({ open: false, navKey });
+  const menuOpen = menu.open && menu.navKey === navKey;
+  const setMenuOpen = (open: boolean) => setMenu({ open, navKey });
+  const closeMenu = () => setMenuOpen(false);
+
+  // Close the mobile menu on Escape; if focus was inside it, return focus to the toggle
   useEffect(() => {
     if (!menuOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMenuOpen(false);
+      if (e.key === 'Escape') {
+        if (menuRef.current?.contains(document.activeElement)) menuButtonRef.current?.focus();
+        setMenu((m) => ({ ...m, open: false }));
+      }
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [menuOpen]);
+
+  // Close the mobile menu when the viewport reaches the lg breakpoint (where it's hidden),
+  // so it doesn't reappear open after e.g. rotating a tablet to landscape and back
+  useEffect(() => {
+    if (!menuOpen) return;
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setMenu((m) => ({ ...m, open: false }));
+    };
+    desktop.addEventListener('change', handleChange);
+    return () => desktop.removeEventListener('change', handleChange);
   }, [menuOpen]);
 
   const isItemActive = (item: NavItem) =>
@@ -61,7 +87,6 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const renderNavLink = (item: NavItem, variant: keyof typeof navStyles) => {
     const styles = navStyles[variant];
     const classes = cn(styles.base, isItemActive(item) ? styles.active : styles.inactive);
-    const closeMenu = () => setMenuOpen(false);
 
     if (item.kind === 'route') {
       return (
@@ -110,19 +135,20 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 
             {/* Mobile menu button */}
             <button
+              ref={menuButtonRef}
               type="button"
               className="lg:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               aria-controls="mobile-menu"
               aria-expanded={menuOpen}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              onClick={() => setMenuOpen((open) => !open)}
+              onClick={() => setMenuOpen(!menuOpen)}
             >
               {menuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
             </button>
           </div>
 
           {/* Mobile links: always rendered (hidden when closed) so the button's aria-controls target exists */}
-          <div id="mobile-menu" hidden={!menuOpen} className="lg:hidden border-t border-gray-200 py-2">
+          <div id="mobile-menu" ref={menuRef} hidden={!menuOpen} className="lg:hidden border-t border-gray-200 py-2">
             {navItems.map((item) => renderNavLink(item, 'mobile'))}
           </div>
         </div>

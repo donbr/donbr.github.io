@@ -100,12 +100,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* [&>a]: lifts every action link above the title's stretched-link overlay */}
       <div className="mt-4 pt-3 border-t border-gray-100 flex flex-wrap gap-4 text-sm font-semibold [&>a]:relative [&>a]:z-10">
         {detailUrl && (
-          <Link
-            to={detailUrl}
-            className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
+          // Visual cue only: the stretched title link already covers the card, so this
+          // isn't a second link (avoids a duplicate tab stop to the same destination)
+          <span
+            aria-hidden="true"
+            className="text-blue-600 inline-flex items-center gap-1"
           >
             Deep Dive <span className="text-sm">&rarr;</span>
-          </Link>
+          </span>
         )}
         {demoUrl && (
           <a

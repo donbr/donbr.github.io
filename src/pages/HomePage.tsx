@@ -1,26 +1,40 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 
 const HomePage: React.FC = () => {
-  // Handle smooth scrolling for anchor links
+  const navigate = useNavigate();
+
+  // Smooth-scroll in-page section links (e.g. /#about)
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLAnchorElement;
-      if (target.hash && target.hash.startsWith('#')) {
-        e.preventDefault();
-        const element = document.querySelector(target.hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-          // Update URL without reload
-          window.history.pushState(null, '', target.hash);
-        }
-      }
+      // Leave modified and middle clicks (open in new tab/window) to the browser
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const anchor = (e.target as Element).closest('a');
+      // Only same-page section links: not other origins, other paths, or new-tab targets
+      if (
+        !anchor?.hash ||
+        anchor.origin !== window.location.origin ||
+        anchor.pathname !== window.location.pathname ||
+        (anchor.target && anchor.target !== '_self')
+      ) return;
+      // getElementById, not querySelector: ids like "1-intro" aren't valid CSS selectors
+      const element = document.getElementById(decodeURIComponent(anchor.hash.slice(1)));
+      if (!element) return; // unknown section: let the browser handle the link
+      e.preventDefault();
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Update the URL through the router (not history.pushState) so location.hash, the
+      // nav's active state and back/forward stay in sync. Keep the query string (e.g.
+      // utm_* tags) and don't stack duplicate entries when the section is already current.
+      navigate(
+        { search: window.location.search, hash: anchor.hash },
+        { replace: anchor.hash === window.location.hash }
+      );
     };
 
     document.addEventListener('click', handleAnchorClick);
     return () => document.removeEventListener('click', handleAnchorClick);
-  }, []);
+  }, [navigate]);
 
   return (
     <Layout>
