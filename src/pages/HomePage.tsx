@@ -5,20 +5,25 @@ import Layout from '@/components/layout/Layout';
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
-  // Handle smooth scrolling for anchor links
+  // Smooth-scroll in-page section links (e.g. /#about)
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLAnchorElement;
-      if (target.hash && target.hash.startsWith('#')) {
-        e.preventDefault();
-        const element = document.querySelector(target.hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-          // Update the URL through the router (not history.pushState) so location.hash,
-          // the nav's active state and back/forward stay in sync
-          navigate({ hash: target.hash });
-        }
-      }
+      // Leave modified and middle clicks (open in new tab/window) to the browser
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const anchor = (e.target as Element).closest('a');
+      if (!anchor?.hash || anchor.pathname !== window.location.pathname) return;
+      // getElementById, not querySelector: ids like "1-intro" aren't valid CSS selectors
+      const element = document.getElementById(decodeURIComponent(anchor.hash.slice(1)));
+      if (!element) return; // unknown section: let the browser handle the link
+      e.preventDefault();
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Update the URL through the router (not history.pushState) so location.hash, the
+      // nav's active state and back/forward stay in sync. Keep the query string (e.g.
+      // utm_* tags) and don't stack duplicate entries when the section is already current.
+      navigate(
+        { search: window.location.search, hash: anchor.hash },
+        { replace: anchor.hash === window.location.hash }
+      );
     };
 
     document.addEventListener('click', handleAnchorClick);
