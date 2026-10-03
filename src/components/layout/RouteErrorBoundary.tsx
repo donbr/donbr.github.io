@@ -8,8 +8,9 @@ const CHUNK_LOAD_ERROR = /dynamically imported module|Importing a module script 
 
 interface RouteErrorBoundaryProps {
   children: React.ReactNode;
-  // Changing this (the current location.key, new on every navigation) clears the error,
-  // so nav links work, including 'Go to homepage' from an error on '/'
+  // Changing this (pathname + hash + location.key) clears the error, so nav links work,
+  // including 'Go to homepage' from an error on '/'. The hash is included because a native
+  // fragment navigation can keep location.key at 'default'.
   resetKey: string;
 }
 
@@ -38,26 +39,30 @@ class RouteErrorBoundary extends React.Component<RouteErrorBoundaryProps, RouteE
     const { error } = this.state;
     if (!error) return this.props.children;
 
-    // Only a chunk that failed to load is fixed by reloading; other render errors are bugs
     const reload = { label: 'Reload page', onClick: () => window.location.reload() };
+    const home = { label: 'Go to homepage', to: '/', variant: 'secondary' as const };
 
-    return CHUNK_LOAD_ERROR.test(error.message) ? (
-      <StatusPage
-        role="alert"
-        title="Page failed to load"
-        heading="This page didn't load"
-        message="The site was probably updated since you opened it. Reloading fetches the latest version."
-        actions={[reload]}
-      />
-    ) : (
-      <StatusPage
-        role="alert"
-        title="Page failed to load"
-        heading="Something went wrong on this page"
-        message="This page hit an error while rendering. The rest of the site still works."
-        actions={[reload, { label: 'Go to homepage', to: '/', variant: 'secondary' }]}
-      />
-    );
+    // Only a chunk that failed to load is fixed by reloading, and only when online: offline,
+    // a reload would swap the site for the browser's offline page (main.tsx skips it too).
+    const content = !CHUNK_LOAD_ERROR.test(error.message)
+      ? {
+          heading: 'Something went wrong on this page',
+          message: 'This page hit an error while rendering. The rest of the site still works.',
+          actions: [reload, home],
+        }
+      : !navigator.onLine
+        ? {
+            heading: 'You appear to be offline',
+            message: 'This page needs a connection to load. Reconnect, then reload the page.',
+            actions: [{ ...home, variant: 'primary' as const }],
+          }
+        : {
+            heading: "This page didn't load",
+            message: 'The site was probably updated since you opened it. Reloading fetches the latest version.',
+            actions: [reload],
+          };
+
+    return <StatusPage role="alert" title="Page failed to load" {...content} />;
   }
 }
 
