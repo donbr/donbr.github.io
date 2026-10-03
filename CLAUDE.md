@@ -39,6 +39,8 @@ npm run deploy           # Deploy to GitHub Pages (runs predeploy build automati
   - `NotFoundPage.tsx`: 404 page
 - **src/components/**: React components
   - `layout/Layout.tsx`: Main layout wrapper with navigation and footer
+  - `layout/RouteErrorBoundary.tsx`: Error boundary around the routes (reload prompt when a lazy chunk fails to load)
+  - `layout/StatusPage.tsx`: Full-page message with actions, shared by the 404 page and the error boundary
   - `ui/`: shadcn/ui components (button, etc.)
   - `projects/`: Project-specific components, each in its own subdirectory
     - `gdelt/GdeltRecordViewer.tsx`: GDELT data viewer
@@ -64,17 +66,17 @@ Simple React Router setup in App.tsx:
 - `/assets/projects/advanced-retrieval` - AdvancedRetrieval
 - `*` - NotFoundPage (404)
 
-No lazy loading is used - all components are directly imported.
+HomePage, ProjectsPage and NotFoundPage are imported directly; every project route is loaded with `React.lazy` inside one `Suspense` boundary (fallback keeps the Layout visible). This keeps ECharts, Cytoscape and Leaflet out of the homepage bundle - add new project routes the same way.
 
 ### Project Data Management
 
-Projects are defined inline as a simple array in `ProjectsPage.tsx` (lines 153-242). Each project has:
+Projects are defined inline as a simple `projects` array in `ProjectsPage.tsx`. Each project has:
 - title
 - description
-- tags (with color mapping defined in tagColorMap at lines 24-73)
+- tags (with color mapping defined in `tagColorMap` inside `ProjectCard`)
 - Optional: demoUrl, codeUrl, huggingFaceUrl, detailUrl
 
-The ProjectCard component is also defined inline in ProjectsPage.tsx (lines 15-150).
+The `ProjectCard` component is also defined inline in `ProjectsPage.tsx`.
 
 ### Layout Component
 
@@ -151,5 +153,6 @@ Located in `src/data/`:
 
 - No testing framework is currently configured
 - No formatter (like Prettier) is configured in package.json
-- Project uses direct imports (no code splitting/lazy loading)
+- Project detail routes are code-split with `React.lazy`, wrapped in `RouteErrorBoundary` (shows a reload prompt if a chunk fails to load, e.g. after a deploy)
+- Page titles: pass `title` to `<Layout>` (e.g. `<Layout title="Projects">`); Layout renders `<title>Projects | Don Branson</title>`, which React 19 hoists into `<head>`. Omit it to keep the full site title from `index.html` (the homepage does)
 - Some project components include their own types (e.g., situational-awareness/types.ts)

@@ -4,7 +4,7 @@ import { ExternalLink, Github, Database } from 'lucide-react';
 
 const GdeltKnowledgeBase: React.FC = () => {
   return (
-    <Layout>
+    <Layout title="GDELT Knowledge Base">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
         <div className="max-w-6xl mx-auto px-4">
