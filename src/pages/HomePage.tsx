@@ -11,7 +11,13 @@ const HomePage: React.FC = () => {
       // Leave modified and middle clicks (open in new tab/window) to the browser
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const anchor = (e.target as Element).closest('a');
-      if (!anchor?.hash || anchor.pathname !== window.location.pathname) return;
+      // Only same-page section links: not other origins, other paths, or new-tab targets
+      if (
+        !anchor?.hash ||
+        anchor.origin !== window.location.origin ||
+        anchor.pathname !== window.location.pathname ||
+        (anchor.target && anchor.target !== '_self')
+      ) return;
       // getElementById, not querySelector: ids like "1-intro" aren't valid CSS selectors
       const element = document.getElementById(decodeURIComponent(anchor.hash.slice(1)));
       if (!element) return; // unknown section: let the browser handle the link
