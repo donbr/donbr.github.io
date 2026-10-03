@@ -73,7 +73,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <div className="group relative bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200">
+    <div className="relative bg-white rounded-lg shadow-md p-6 project-card hover:shadow-lg transition-shadow border-t-2 border-gray-200">
       <h2 className="text-xl font-semibold text-gray-800 mb-3">
         {detailUrl ? (
           // Stretched link: the ::after overlay makes the whole card clickable without nesting links
@@ -104,7 +104,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           // isn't a second link (avoids a duplicate tab stop to the same destination)
           <span
             aria-hidden="true"
-            className="text-blue-600 group-hover:text-blue-800 inline-flex items-center gap-1"
+            className="text-blue-600 inline-flex items-center gap-1"
           >
             Deep Dive <span className="text-sm">&rarr;</span>
           </span>
